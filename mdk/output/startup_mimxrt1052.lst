@@ -1,0 +1,1777 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; * ----------------------------------------------------
+                       ---------------------
+    2 00000000         ; *  @file:    startup_MIMXRT1052.s
+    3 00000000         ; *  @purpose: CMSIS Cortex-M7 Core Device Startup File
+    4 00000000         ; *            MIMXRT1052
+    5 00000000         ; *  @version: 0.1
+    6 00000000         ; *  @date:    2017-1-10
+    7 00000000         ; *  @build:   b171208
+    8 00000000         ; * ----------------------------------------------------
+                       ---------------------
+    9 00000000         ; *
+   10 00000000         ; * The Clear BSD License
+   11 00000000         ; * Copyright 1997-2016 Freescale Semiconductor, Inc.
+   12 00000000         ; * Copyright 2016-2017 NXP
+   13 00000000         ; * All rights reserved.
+   14 00000000         ; *
+   15 00000000         ; * Redistribution and use in source and binary forms, w
+                       ith or without
+   16 00000000         ; * modification, are permitted (subject to the limitati
+                       ons in the
+   17 00000000         ; * disclaimer below) provided that the following condit
+                       ions are met:
+   18 00000000         ; *
+   19 00000000         ; * * Redistributions of source code must retain the abo
+                       ve copyright
+   20 00000000         ; *   notice, this list of conditions and the following 
+                       disclaimer.
+   21 00000000         ; *
+   22 00000000         ; * * Redistributions in binary form must reproduce the 
+                       above copyright
+   23 00000000         ; *   notice, this list of conditions and the following 
+                       disclaimer in the
+   24 00000000         ; *   documentation and/or other materials provided with
+                        the distribution.
+   25 00000000         ; *
+   26 00000000         ; * * Neither the name of the copyright holder nor the n
+                       ames of its
+   27 00000000         ; *   contributors may be used to endorse or promote pro
+                       ducts derived from
+   28 00000000         ; *   this software without specific prior written permi
+                       ssion.
+   29 00000000         ; *
+   30 00000000         ; * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT
+                        RIGHTS ARE
+   31 00000000         ; * GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED B
+                       Y THE COPYRIGHT
+   32 00000000         ; * HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR 
+                       IMPLIED
+   33 00000000         ; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLI
+                       ED WARRANTIES OF
+   34 00000000         ; * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+                        ARE
+   35 00000000         ; * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER O
+                       R CONTRIBUTORS BE
+   36 00000000         ; * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL
+                       , EXEMPLARY, OR
+   37 00000000         ; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO
+                       , PROCUREMENT OF
+   38 00000000         ; * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                       PROFITS; OR
+   39 00000000         ; * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THE
+                       ORY OF LIABILITY,
+   40 00000000         ; * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCL
+                       UDING NEGLIGENCE
+   41 00000000         ; * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF T
+                       HIS SOFTWARE, EVEN
+   42 00000000         ; * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+   43 00000000         ; *
+   44 00000000         ; *------- <<< Use Configuration Wizard in Context Menu 
+                       >>> ------------------
+   45 00000000         ; *
+   46 00000000         ; ******************************************************
+                       ***********************/
+   47 00000000         
+   48 00000000         
+   49 00000000                 PRESERVE8
+   50 00000000                 THUMB
+   51 00000000         
+   52 00000000         
+   53 00000000         ; Vector Table Mapped to Address 0 at Reset
+   54 00000000         
+   55 00000000                 AREA             RESET, DATA, READONLY
+   56 00000000                 EXPORT           __Vectors
+   57 00000000                 EXPORT           __Vectors_End
+   58 00000000                 EXPORT           __Vectors_Size
+   59 00000000                 IMPORT           |Image$$ARM_LIB_STACK$$ZI$$Limi
+t|
+   60 00000000         
+   61 00000000 00000000 
+                       __Vectors
+                               DCD              |Image$$ARM_LIB_STACK$$ZI$$Limi
+t| 
+                                                            ; Top of Stack
+   62 00000004 00000000        DCD              Reset_Handler ; Reset Handler
+   63 00000008 00000000        DCD              NMI_Handler ;NMI Handler
+   64 0000000C 00000000        DCD              HardFault_Handler 
+                                                            ;Hard Fault Handler
+                                                            
+   65 00000010 00000000        DCD              MemManage_Handler 
+                                                            ;MPU Fault Handler
+   66 00000014 00000000        DCD              BusFault_Handler 
+                                                            ;Bus Fault Handler
+   67 00000018 00000000        DCD              UsageFault_Handler ;Usage Fault
+                                                             Handler
+   68 0000001C 00000000        DCD              0           ;Reserved
+   69 00000020 00000000        DCD              0           ;Reserved
+   70 00000024 00000000        DCD              0           ;Reserved
+   71 00000028 00000000        DCD              0           ;Reserved
+   72 0000002C 00000000        DCD              SVC_Handler ;SVCall Handler
+   73 00000030 00000000        DCD              DebugMon_Handler ;Debug Monitor
+                                                             Handler
+   74 00000034 00000000        DCD              0           ;Reserved
+   75 00000038 00000000        DCD              PendSV_Handler ;PendSV Handler
+   76 0000003C 00000000        DCD              SysTick_Handler 
+                                                            ;SysTick Handler
+   77 00000040         
+   78 00000040         ;External Interrupts
+   79 00000040 00000000        DCD              DMA0_DMA16_IRQHandler ;DMA chan
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                                                            nel 0/16 transfer c
+                                                            omplete
+   80 00000044 00000000        DCD              DMA1_DMA17_IRQHandler ;DMA chan
+                                                            nel 1/17 transfer c
+                                                            omplete
+   81 00000048 00000000        DCD              DMA2_DMA18_IRQHandler ;DMA chan
+                                                            nel 2/18 transfer c
+                                                            omplete
+   82 0000004C 00000000        DCD              DMA3_DMA19_IRQHandler ;DMA chan
+                                                            nel 3/19 transfer c
+                                                            omplete
+   83 00000050 00000000        DCD              DMA4_DMA20_IRQHandler ;DMA chan
+                                                            nel 4/20 transfer c
+                                                            omplete
+   84 00000054 00000000        DCD              DMA5_DMA21_IRQHandler ;DMA chan
+                                                            nel 5/21 transfer c
+                                                            omplete
+   85 00000058 00000000        DCD              DMA6_DMA22_IRQHandler ;DMA chan
+                                                            nel 6/22 transfer c
+                                                            omplete
+   86 0000005C 00000000        DCD              DMA7_DMA23_IRQHandler ;DMA chan
+                                                            nel 7/23 transfer c
+                                                            omplete
+   87 00000060 00000000        DCD              DMA8_DMA24_IRQHandler ;DMA chan
+                                                            nel 8/24 transfer c
+                                                            omplete
+   88 00000064 00000000        DCD              DMA9_DMA25_IRQHandler ;DMA chan
+                                                            nel 9/25 transfer c
+                                                            omplete
+   89 00000068 00000000        DCD              DMA10_DMA26_IRQHandler ;DMA cha
+                                                            nnel 10/26 transfer
+                                                             complete
+   90 0000006C 00000000        DCD              DMA11_DMA27_IRQHandler ;DMA cha
+                                                            nnel 11/27 transfer
+                                                             complete
+   91 00000070 00000000        DCD              DMA12_DMA28_IRQHandler ;DMA cha
+                                                            nnel 12/28 transfer
+                                                             complete
+   92 00000074 00000000        DCD              DMA13_DMA29_IRQHandler ;DMA cha
+                                                            nnel 13/29 transfer
+                                                             complete
+   93 00000078 00000000        DCD              DMA14_DMA30_IRQHandler ;DMA cha
+                                                            nnel 14/30 transfer
+                                                             complete
+   94 0000007C 00000000        DCD              DMA15_DMA31_IRQHandler ;DMA cha
+                                                            nnel 15/31 transfer
+                                                             complete
+   95 00000080 00000000        DCD              DMA_ERROR_IRQHandler ;DMA error
+                                                             interrupt channels
+                                                             0-15 / 16-31
+   96 00000084 00000000        DCD              CTI0_ERROR_IRQHandler 
+                                                            ;CTI0_Error
+   97 00000088 00000000        DCD              CTI1_ERROR_IRQHandler 
+                                                            ;CTI1_Error
+   98 0000008C 00000000        DCD              CORE_IRQHandler ;CorePlatform e
+                                                            xception IRQ
+   99 00000090 00000000        DCD              LPUART1_IRQHandler ;LPUART1 TX 
+                                                            interrupt and RX in
+                                                            terrupt
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+  100 00000094 00000000        DCD              LPUART2_IRQHandler ;LPUART2 TX 
+                                                            interrupt and RX in
+                                                            terrupt
+  101 00000098 00000000        DCD              LPUART3_IRQHandler ;LPUART3 TX 
+                                                            interrupt and RX in
+                                                            terrupt
+  102 0000009C 00000000        DCD              LPUART4_IRQHandler ;LPUART4 TX 
+                                                            interrupt and RX in
+                                                            terrupt
+  103 000000A0 00000000        DCD              LPUART5_IRQHandler ;LPUART5 TX 
+                                                            interrupt and RX in
+                                                            terrupt
+  104 000000A4 00000000        DCD              LPUART6_IRQHandler ;LPUART6 TX 
+                                                            interrupt and RX in
+                                                            terrupt
+  105 000000A8 00000000        DCD              LPUART7_IRQHandler ;LPUART7 TX 
+                                                            interrupt and RX in
+                                                            terrupt
+  106 000000AC 00000000        DCD              LPUART8_IRQHandler ;LPUART8 TX 
+                                                            interrupt and RX in
+                                                            terrupt
+  107 000000B0 00000000        DCD              LPI2C1_IRQHandler 
+                                                            ;LPI2C1 interrupt
+  108 000000B4 00000000        DCD              LPI2C2_IRQHandler 
+                                                            ;LPI2C2 interrupt
+  109 000000B8 00000000        DCD              LPI2C3_IRQHandler 
+                                                            ;LPI2C3 interrupt
+  110 000000BC 00000000        DCD              LPI2C4_IRQHandler 
+                                                            ;LPI2C4 interrupt
+  111 000000C0 00000000        DCD              LPSPI1_IRQHandler ;LPSPI1 singl
+                                                            e interrupt vector 
+                                                            for all sources
+  112 000000C4 00000000        DCD              LPSPI2_IRQHandler ;LPSPI2 singl
+                                                            e interrupt vector 
+                                                            for all sources
+  113 000000C8 00000000        DCD              LPSPI3_IRQHandler ;LPSPI3 singl
+                                                            e interrupt vector 
+                                                            for all sources
+  114 000000CC 00000000        DCD              LPSPI4_IRQHandler ;LPSPI4  sing
+                                                            le interrupt vector
+                                                             for all sources
+  115 000000D0 00000000        DCD              CAN1_IRQHandler ;CAN1 interrupt
+                                                            
+  116 000000D4 00000000        DCD              CAN2_IRQHandler ;CAN2 interrupt
+                                                            
+  117 000000D8 00000000        DCD              FLEXRAM_IRQHandler ;FlexRAM add
+                                                            ress out of range O
+                                                            r access hit IRQ
+  118 000000DC 00000000        DCD              KPP_IRQHandler ;Keypad nterrupt
+                                                            
+  119 000000E0 00000000        DCD              TSC_DIG_IRQHandler 
+                                                            ;TSC interrupt
+  120 000000E4 00000000        DCD              GPR_IRQ_IRQHandler 
+                                                            ;GPR interrupt
+  121 000000E8 00000000        DCD              LCDIF_IRQHandler 
+                                                            ;LCDIF interrupt
+  122 000000EC 00000000        DCD              CSI_IRQHandler ;CSI interrupt
+  123 000000F0 00000000        DCD              PXP_IRQHandler ;PXP interrupt
+  124 000000F4 00000000        DCD              WDOG2_IRQHandler 
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+                                                            ;WDOG2 interrupt
+  125 000000F8 00000000        DCD              SNVS_HP_WRAPPER_IRQHandler ;SRT
+                                                            C Consolidated Inte
+                                                            rrupt. Non TZ
+  126 000000FC 00000000        DCD              SNVS_HP_WRAPPER_TZ_IRQHandler ;
+                                                            SRTC Security Inter
+                                                            rupt. TZ
+  127 00000100 00000000        DCD              SNVS_LP_WRAPPER_IRQHandler ;ON-
+                                                            OFF button press sh
+                                                            orter than 5 secs (
+                                                            pulse event)
+  128 00000104 00000000        DCD              CSU_IRQHandler ;CSU interrupt
+  129 00000108 00000000        DCD              DCP_IRQHandler 
+                                                            ;DCP_IRQ interrupt
+  130 0000010C 00000000        DCD              DCP_VMI_IRQHandler ;DCP_VMI_IRQ
+                                                             interrupt
+  131 00000110 00000000        DCD              Reserved68_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  132 00000114 00000000        DCD              TRNG_IRQHandler ;TRNG interrupt
+                                                            
+  133 00000118 00000000        DCD              SJC_IRQHandler ;SJC interrupt
+  134 0000011C 00000000        DCD              BEE_IRQHandler ;BEE interrupt
+  135 00000120 00000000        DCD              SAI1_IRQHandler ;SAI1 interrupt
+                                                            
+  136 00000124 00000000        DCD              SAI2_IRQHandler ;SAI1 interrupt
+                                                            
+  137 00000128 00000000        DCD              SAI3_RX_IRQHandler 
+                                                            ;SAI3 interrupt
+  138 0000012C 00000000        DCD              SAI3_TX_IRQHandler 
+                                                            ;SAI3 interrupt
+  139 00000130 00000000        DCD              SPDIF_IRQHandler 
+                                                            ;SPDIF interrupt
+  140 00000134 00000000        DCD              ANATOP_EVENT0_IRQHandler 
+                                                            ;ANATOP interrupt
+  141 00000138 00000000        DCD              ANATOP_EVENT1_IRQHandler 
+                                                            ;ANATOP interrupt
+  142 0000013C 00000000        DCD              ANATOP_TAMP_LOW_HIGH_IRQHandler
+ 
+                                                            ;ANATOP interrupt
+  143 00000140 00000000        DCD              ANATOP_TEMP_PANIC_IRQHandler 
+                                                            ;ANATOP interrupt
+  144 00000144 00000000        DCD              USB_PHY1_IRQHandler ;USBPHY (UT
+                                                            MI0), Interrupt
+  145 00000148 00000000        DCD              USB_PHY2_IRQHandler ;USBPHY (UT
+                                                            MI0), Interrupt
+  146 0000014C 00000000        DCD              ADC1_IRQHandler ;ADC1 interrupt
+                                                            
+  147 00000150 00000000        DCD              ADC2_IRQHandler ;ADC2 interrupt
+                                                            
+  148 00000154 00000000        DCD              DCDC_IRQHandler ;DCDC interrupt
+                                                            
+  149 00000158 00000000        DCD              Reserved86_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  150 0000015C 00000000        DCD              Reserved87_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  151 00000160 00000000        DCD              GPIO1_INT0_IRQHandler ;Active H
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+                                                            IGH Interrupt from 
+                                                            INT0 from GPIO
+  152 00000164 00000000        DCD              GPIO1_INT1_IRQHandler ;Active H
+                                                            IGH Interrupt from 
+                                                            INT1 from GPIO
+  153 00000168 00000000        DCD              GPIO1_INT2_IRQHandler ;Active H
+                                                            IGH Interrupt from 
+                                                            INT2 from GPIO
+  154 0000016C 00000000        DCD              GPIO1_INT3_IRQHandler ;Active H
+                                                            IGH Interrupt from 
+                                                            INT3 from GPIO
+  155 00000170 00000000        DCD              GPIO1_INT4_IRQHandler ;Active H
+                                                            IGH Interrupt from 
+                                                            INT4 from GPIO
+  156 00000174 00000000        DCD              GPIO1_INT5_IRQHandler ;Active H
+                                                            IGH Interrupt from 
+                                                            INT5 from GPIO
+  157 00000178 00000000        DCD              GPIO1_INT6_IRQHandler ;Active H
+                                                            IGH Interrupt from 
+                                                            INT6 from GPIO
+  158 0000017C 00000000        DCD              GPIO1_INT7_IRQHandler ;Active H
+                                                            IGH Interrupt from 
+                                                            INT7 from GPIO
+  159 00000180 00000000        DCD              GPIO1_Combined_0_15_IRQHandler 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O1 signal 0 through
+                                                            out 15
+  160 00000184 00000000        DCD              GPIO1_Combined_16_31_IRQHandler
+ 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O1 signal 16 throug
+                                                            hout 31
+  161 00000188 00000000        DCD              GPIO2_Combined_0_15_IRQHandler 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O2 signal 0 through
+                                                            out 15
+  162 0000018C 00000000        DCD              GPIO2_Combined_16_31_IRQHandler
+ 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O2 signal 16 throug
+                                                            hout 31
+  163 00000190 00000000        DCD              GPIO3_Combined_0_15_IRQHandler 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O3 signal 0 through
+                                                            out 15
+  164 00000194 00000000        DCD              GPIO3_Combined_16_31_IRQHandler
+ 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O3 signal 16 throug
+                                                            hout 31
+  165 00000198 00000000        DCD              GPIO4_Combined_0_15_IRQHandler 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+
+
+
+ARM Macro Assembler    Page 7 
+
+
+                                                            O4 signal 0 through
+                                                            out 15
+  166 0000019C 00000000        DCD              GPIO4_Combined_16_31_IRQHandler
+ 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O4 signal 16 throug
+                                                            hout 31
+  167 000001A0 00000000        DCD              GPIO5_Combined_0_15_IRQHandler 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O5 signal 0 through
+                                                            out 15
+  168 000001A4 00000000        DCD              GPIO5_Combined_16_31_IRQHandler
+ 
+                                                            ;Combined interrupt
+                                                             indication for GPI
+                                                            O5 signal 16 throug
+                                                            hout 31
+  169 000001A8 00000000        DCD              FLEXIO1_IRQHandler 
+                                                            ;FLEXIO1 interrupt
+  170 000001AC 00000000        DCD              FLEXIO2_IRQHandler 
+                                                            ;FLEXIO2 interrupt
+  171 000001B0 00000000        DCD              WDOG1_IRQHandler 
+                                                            ;WDOG1 interrupt
+  172 000001B4 00000000        DCD              RTWDOG_IRQHandler 
+                                                            ;RTWDOG interrupt
+  173 000001B8 00000000        DCD              EWM_IRQHandler ;EWM interrupt
+  174 000001BC 00000000        DCD              CCM_1_IRQHandler 
+                                                            ;CCM IRQ1 interrupt
+                                                            
+  175 000001C0 00000000        DCD              CCM_2_IRQHandler 
+                                                            ;CCM IRQ2 interrupt
+                                                            
+  176 000001C4 00000000        DCD              GPC_IRQHandler ;GPC interrupt
+  177 000001C8 00000000        DCD              SRC_IRQHandler ;SRC interrupt
+  178 000001CC 00000000        DCD              Reserved115_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  179 000001D0 00000000        DCD              GPT1_IRQHandler ;GPT1 interrupt
+                                                            
+  180 000001D4 00000000        DCD              GPT2_IRQHandler ;GPT2 interrupt
+                                                            
+  181 000001D8 00000000        DCD              PWM1_0_IRQHandler ;PWM1 capture
+                                                             0, compare 0, or r
+                                                            eload 0 interrupt
+  182 000001DC 00000000        DCD              PWM1_1_IRQHandler ;PWM1 capture
+                                                             1, compare 1, or r
+                                                            eload 0 interrupt
+  183 000001E0 00000000        DCD              PWM1_2_IRQHandler ;PWM1 capture
+                                                             2, compare 2, or r
+                                                            eload 0 interrupt
+  184 000001E4 00000000        DCD              PWM1_3_IRQHandler ;PWM1 capture
+                                                             3, compare 3, or r
+                                                            eload 0 interrupt
+  185 000001E8 00000000        DCD              PWM1_FAULT_IRQHandler ;PWM1 fau
+                                                            lt or reload error 
+                                                            interrupt
+  186 000001EC 00000000        DCD              Reserved123_IRQHandler 
+
+
+
+ARM Macro Assembler    Page 8 
+
+
+                                                            ;Reserved interrupt
+                                                            
+  187 000001F0 00000000        DCD              FLEXSPI_IRQHandler 
+                                                            ;FlexSPI0 interrupt
+                                                            
+  188 000001F4 00000000        DCD              SEMC_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  189 000001F8 00000000        DCD              USDHC1_IRQHandler 
+                                                            ;USDHC1 interrupt
+  190 000001FC 00000000        DCD              USDHC2_IRQHandler 
+                                                            ;USDHC2 interrupt
+  191 00000200 00000000        DCD              USB_OTG2_IRQHandler 
+                                                            ;USBO2 USB OTG2
+  192 00000204 00000000        DCD              USB_OTG1_IRQHandler 
+                                                            ;USBO2 USB OTG1
+  193 00000208 00000000        DCD              ENET_IRQHandler ;ENET interrupt
+                                                            
+  194 0000020C 00000000        DCD              ENET_1588_Timer_IRQHandler ;ENE
+                                                            T_1588_Timer interr
+                                                            upt
+  195 00000210 00000000        DCD              XBAR1_IRQ_0_1_IRQHandler 
+                                                            ;XBAR1 interrupt
+  196 00000214 00000000        DCD              XBAR1_IRQ_2_3_IRQHandler 
+                                                            ;XBAR1 interrupt
+  197 00000218 00000000        DCD              ADC_ETC_IRQ0_IRQHandler ;ADCETC
+                                                             IRQ0 interrupt
+  198 0000021C 00000000        DCD              ADC_ETC_IRQ1_IRQHandler ;ADCETC
+                                                             IRQ1 interrupt
+  199 00000220 00000000        DCD              ADC_ETC_IRQ2_IRQHandler ;ADCETC
+                                                             IRQ2 interrupt
+  200 00000224 00000000        DCD              ADC_ETC_ERROR_IRQ_IRQHandler ;A
+                                                            DCETC Error IRQ int
+                                                            errupt
+  201 00000228 00000000        DCD              PIT_IRQHandler ;PIT interrupt
+  202 0000022C 00000000        DCD              ACMP1_IRQHandler 
+                                                            ;ACMP interrupt
+  203 00000230 00000000        DCD              ACMP2_IRQHandler 
+                                                            ;ACMP interrupt
+  204 00000234 00000000        DCD              ACMP3_IRQHandler 
+                                                            ;ACMP interrupt
+  205 00000238 00000000        DCD              ACMP4_IRQHandler 
+                                                            ;ACMP interrupt
+  206 0000023C 00000000        DCD              Reserved143_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  207 00000240 00000000        DCD              Reserved144_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  208 00000244 00000000        DCD              ENC1_IRQHandler ;ENC1 interrupt
+                                                            
+  209 00000248 00000000        DCD              ENC2_IRQHandler ;ENC2 interrupt
+                                                            
+  210 0000024C 00000000        DCD              ENC3_IRQHandler ;ENC3 interrupt
+                                                            
+  211 00000250 00000000        DCD              ENC4_IRQHandler ;ENC4 interrupt
+                                                            
+  212 00000254 00000000        DCD              TMR1_IRQHandler ;TMR1 interrupt
+                                                            
+
+
+
+ARM Macro Assembler    Page 9 
+
+
+  213 00000258 00000000        DCD              TMR2_IRQHandler ;TMR2 interrupt
+                                                            
+  214 0000025C 00000000        DCD              TMR3_IRQHandler ;TMR3 interrupt
+                                                            
+  215 00000260 00000000        DCD              TMR4_IRQHandler ;TMR4 interrupt
+                                                            
+  216 00000264 00000000        DCD              PWM2_0_IRQHandler ;PWM2 capture
+                                                             0, compare 0, or r
+                                                            eload 0 interrupt
+  217 00000268 00000000        DCD              PWM2_1_IRQHandler ;PWM2 capture
+                                                             1, compare 1, or r
+                                                            eload 0 interrupt
+  218 0000026C 00000000        DCD              PWM2_2_IRQHandler ;PWM2 capture
+                                                             2, compare 2, or r
+                                                            eload 0 interrupt
+  219 00000270 00000000        DCD              PWM2_3_IRQHandler ;PWM2 capture
+                                                             3, compare 3, or r
+                                                            eload 0 interrupt
+  220 00000274 00000000        DCD              PWM2_FAULT_IRQHandler ;PWM2 fau
+                                                            lt or reload error 
+                                                            interrupt
+  221 00000278 00000000        DCD              PWM3_0_IRQHandler ;PWM3 capture
+                                                             0, compare 0, or r
+                                                            eload 0 interrupt
+  222 0000027C 00000000        DCD              PWM3_1_IRQHandler ;PWM3 capture
+                                                             1, compare 1, or r
+                                                            eload 0 interrupt
+  223 00000280 00000000        DCD              PWM3_2_IRQHandler ;PWM3 capture
+                                                             2, compare 2, or r
+                                                            eload 0 interrupt
+  224 00000284 00000000        DCD              PWM3_3_IRQHandler ;PWM3 capture
+                                                             3, compare 3, or r
+                                                            eload 0 interrupt
+  225 00000288 00000000        DCD              PWM3_FAULT_IRQHandler ;PWM3 fau
+                                                            lt or reload error 
+                                                            interrupt
+  226 0000028C 00000000        DCD              PWM4_0_IRQHandler ;PWM4 capture
+                                                             0, compare 0, or r
+                                                            eload 0 interrupt
+  227 00000290 00000000        DCD              PWM4_1_IRQHandler ;PWM4 capture
+                                                             1, compare 1, or r
+                                                            eload 0 interrupt
+  228 00000294 00000000        DCD              PWM4_2_IRQHandler ;PWM4 capture
+                                                             2, compare 2, or r
+                                                            eload 0 interrupt
+  229 00000298 00000000        DCD              PWM4_3_IRQHandler ;PWM4 capture
+                                                             3, compare 3, or r
+                                                            eload 0 interrupt
+  230 0000029C 00000000        DCD              PWM4_FAULT_IRQHandler ;PWM4 fau
+                                                            lt or reload error 
+                                                            interrupt
+  231 000002A0 00000000        DCD              Reserved168_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  232 000002A4 00000000        DCD              Reserved169_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  233 000002A8 00000000        DCD              Reserved170_IRQHandler 
+                                                            ;Reserved interrupt
+
+
+
+ARM Macro Assembler    Page 10 
+
+
+                                                            
+  234 000002AC 00000000        DCD              Reserved171_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  235 000002B0 00000000        DCD              Reserved172_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  236 000002B4 00000000        DCD              Reserved173_IRQHandler 
+                                                            ;Reserved interrupt
+                                                            
+  237 000002B8 00000000        DCD              SJC_ARM_DEBUG_IRQHandler ;SJC A
+                                                            RM debug interrupt
+  238 000002BC 00000000        DCD              NMI_WAKEUP_IRQHandler 
+                                                            ;NMI wake up
+  239 000002C0 00000000        DCD              DefaultISR  ;176
+  240 000002C4 00000000        DCD              DefaultISR  ;177
+  241 000002C8 00000000        DCD              DefaultISR  ;178
+  242 000002CC 00000000        DCD              DefaultISR  ;179
+  243 000002D0 00000000        DCD              DefaultISR  ;180
+  244 000002D4 00000000        DCD              DefaultISR  ;181
+  245 000002D8 00000000        DCD              DefaultISR  ;182
+  246 000002DC 00000000        DCD              DefaultISR  ;183
+  247 000002E0 00000000        DCD              DefaultISR  ;184
+  248 000002E4 00000000        DCD              DefaultISR  ;185
+  249 000002E8 00000000        DCD              DefaultISR  ;186
+  250 000002EC 00000000        DCD              DefaultISR  ;187
+  251 000002F0 00000000        DCD              DefaultISR  ;188
+  252 000002F4 00000000        DCD              DefaultISR  ;189
+  253 000002F8 00000000        DCD              DefaultISR  ;190
+  254 000002FC 00000000        DCD              DefaultISR  ;191
+  255 00000300 00000000        DCD              DefaultISR  ;192
+  256 00000304 00000000        DCD              DefaultISR  ;193
+  257 00000308 00000000        DCD              DefaultISR  ;194
+  258 0000030C 00000000        DCD              DefaultISR  ;195
+  259 00000310 00000000        DCD              DefaultISR  ;196
+  260 00000314 00000000        DCD              DefaultISR  ;197
+  261 00000318 00000000        DCD              DefaultISR  ;198
+  262 0000031C 00000000        DCD              DefaultISR  ;199
+  263 00000320 00000000        DCD              DefaultISR  ;200
+  264 00000324 00000000        DCD              DefaultISR  ;201
+  265 00000328 00000000        DCD              DefaultISR  ;202
+  266 0000032C 00000000        DCD              DefaultISR  ;203
+  267 00000330 00000000        DCD              DefaultISR  ;204
+  268 00000334 00000000        DCD              DefaultISR  ;205
+  269 00000338 00000000        DCD              DefaultISR  ;206
+  270 0000033C 00000000        DCD              DefaultISR  ;207
+  271 00000340 00000000        DCD              DefaultISR  ;208
+  272 00000344 00000000        DCD              DefaultISR  ;209
+  273 00000348 00000000        DCD              DefaultISR  ;210
+  274 0000034C 00000000        DCD              DefaultISR  ;211
+  275 00000350 00000000        DCD              DefaultISR  ;212
+  276 00000354 00000000        DCD              DefaultISR  ;213
+  277 00000358 00000000        DCD              DefaultISR  ;214
+  278 0000035C 00000000        DCD              DefaultISR  ;215
+  279 00000360 00000000        DCD              DefaultISR  ;216
+  280 00000364 00000000        DCD              DefaultISR  ;217
+  281 00000368 00000000        DCD              DefaultISR  ;218
+  282 0000036C 00000000        DCD              DefaultISR  ;219
+  283 00000370 00000000        DCD              DefaultISR  ;220
+
+
+
+ARM Macro Assembler    Page 11 
+
+
+  284 00000374 00000000        DCD              DefaultISR  ;221
+  285 00000378 00000000        DCD              DefaultISR  ;222
+  286 0000037C 00000000        DCD              DefaultISR  ;223
+  287 00000380 00000000        DCD              DefaultISR  ;224
+  288 00000384 00000000        DCD              DefaultISR  ;225
+  289 00000388 00000000        DCD              DefaultISR  ;226
+  290 0000038C 00000000        DCD              DefaultISR  ;227
+  291 00000390 00000000        DCD              DefaultISR  ;228
+  292 00000394 00000000        DCD              DefaultISR  ;229
+  293 00000398 00000000        DCD              DefaultISR  ;230
+  294 0000039C 00000000        DCD              DefaultISR  ;231
+  295 000003A0 00000000        DCD              DefaultISR  ;232
+  296 000003A4 00000000        DCD              DefaultISR  ;233
+  297 000003A8 00000000        DCD              DefaultISR  ;234
+  298 000003AC 00000000        DCD              DefaultISR  ;235
+  299 000003B0 00000000        DCD              DefaultISR  ;236
+  300 000003B4 00000000        DCD              DefaultISR  ;237
+  301 000003B8 00000000        DCD              DefaultISR  ;238
+  302 000003BC 00000000        DCD              DefaultISR  ;239
+  303 000003C0 00000000        DCD              DefaultISR  ;240
+  304 000003C4 00000000        DCD              DefaultISR  ;241
+  305 000003C8 00000000        DCD              DefaultISR  ;242
+  306 000003CC 00000000        DCD              DefaultISR  ;243
+  307 000003D0 00000000        DCD              DefaultISR  ;244
+  308 000003D4 00000000        DCD              DefaultISR  ;245
+  309 000003D8 00000000        DCD              DefaultISR  ;246
+  310 000003DC 00000000        DCD              DefaultISR  ;247
+  311 000003E0 00000000        DCD              DefaultISR  ;248
+  312 000003E4 00000000        DCD              DefaultISR  ;249
+  313 000003E8 00000000        DCD              DefaultISR  ;250
+  314 000003EC 00000000        DCD              DefaultISR  ;251
+  315 000003F0 00000000        DCD              DefaultISR  ;252
+  316 000003F4 00000000        DCD              DefaultISR  ;253
+  317 000003F8 00000000        DCD              DefaultISR  ;254
+  318 000003FC FFFFFFFF        DCD              0xFFFFFFFF  ; Reserved for user
+                                                             TRIM value
+  319 00000400         __Vectors_End
+  320 00000400         
+  321 00000400 00000400 
+                       __Vectors_Size
+                               EQU              __Vectors_End - __Vectors
+  322 00000400         
+  323 00000400         ;AREA    |.text|, CODE, READONLY
+  324 00000400                 AREA             RES_HANDLER, CODE, READONLY
+  325 00000000         
+  326 00000000         ; Reset Handler
+  327 00000000         
+  328 00000000         Reset_Handler
+                               PROC
+  329 00000000                 EXPORT           Reset_Handler             [WEAK
+]
+  330 00000000                 IMPORT           SystemInit
+  331 00000000                 IMPORT           __main
+  332 00000000         
+  333 00000000 B672            CPSID            I           ; Mask interrupts
+  334 00000002 4805            LDR              R0, =0xE000ED08
+  335 00000004 4905            LDR              R1, =__Vectors
+  336 00000006 6001            STR              R1, [R0]
+  337 00000008 680A            LDR              R2, [R1]
+
+
+
+ARM Macro Assembler    Page 12 
+
+
+  338 0000000A F382 8808       MSR              MSP, R2
+  339 0000000E 4804            LDR              R0, =SystemInit
+  340 00000010 4780            BLX              R0
+  341 00000012 B662            CPSIE            i           ; Unmask interrupts
+                                                            
+  342 00000014 4803            LDR              R0, =__main
+  343 00000016 4700            BX               R0
+  344 00000018                 ENDP
+  345 00000018         
+  346 00000018 E000ED08 
+              00000000 
+              00000000 
+              00000000         AREA             OTHER_HANDLER, CODE, READONLY
+  347 00000000         ; Dummy Exception Handlers (infinite loops which can be 
+                       modified)
+  349 00000000         NMI_Handler
+                               PROC
+  350 00000000                 EXPORT           NMI_Handler         [WEAK]
+  351 00000000 E7FE            B                .
+  352 00000002                 ENDP
+  354 00000002         HardFault_Handler
+                               PROC
+  355 00000002                 EXPORT           HardFault_Handler         [WEAK
+]
+  356 00000002 E7FE            B                .
+  357 00000004                 ENDP
+  359 00000004         MemManage_Handler
+                               PROC
+  360 00000004                 EXPORT           MemManage_Handler         [WEAK
+]
+  361 00000004 E7FE            B                .
+  362 00000006                 ENDP
+  364 00000006         BusFault_Handler
+                               PROC
+  365 00000006                 EXPORT           BusFault_Handler         [WEAK]
+  366 00000006 E7FE            B                .
+  367 00000008                 ENDP
+  369 00000008         UsageFault_Handler
+                               PROC
+  370 00000008                 EXPORT           UsageFault_Handler         [WEA
+K]
+  371 00000008 E7FE            B                .
+  372 0000000A                 ENDP
+  374 0000000A         SVC_Handler
+                               PROC
+  375 0000000A                 EXPORT           SVC_Handler         [WEAK]
+  376 0000000A E7FE            B                .
+  377 0000000C                 ENDP
+  379 0000000C         DebugMon_Handler
+                               PROC
+  380 0000000C                 EXPORT           DebugMon_Handler         [WEAK]
+  381 0000000C E7FE            B                .
+  382 0000000E                 ENDP
+  384 0000000E         PendSV_Handler
+                               PROC
+  385 0000000E                 EXPORT           PendSV_Handler         [WEAK]
+  386 0000000E E7FE            B                .
+  387 00000010                 ENDP
+  389 00000010         SysTick_Handler
+
+
+
+ARM Macro Assembler    Page 13 
+
+
+                               PROC
+  390 00000010                 EXPORT           SysTick_Handler         [WEAK]
+  391 00000010 E7FE            B                .
+  392 00000012                 ENDP
+  394 00000012         DMA0_DMA16_IRQHandler
+                               PROC
+  395 00000012                 EXPORT           DMA0_DMA16_IRQHandler         [
+WEAK]
+  396 00000012 4830            LDR              R0, =DMA0_DMA16_DriverIRQHandle
+r
+  397 00000014 4700            BX               R0
+  398 00000016                 ENDP
+  399 00000016         
+  401 00000016         DMA1_DMA17_IRQHandler
+                               PROC
+  402 00000016                 EXPORT           DMA1_DMA17_IRQHandler         [
+WEAK]
+  403 00000016 4830            LDR              R0, =DMA1_DMA17_DriverIRQHandle
+r
+  404 00000018 4700            BX               R0
+  405 0000001A                 ENDP
+  406 0000001A         
+  408 0000001A         DMA2_DMA18_IRQHandler
+                               PROC
+  409 0000001A                 EXPORT           DMA2_DMA18_IRQHandler         [
+WEAK]
+  410 0000001A 4830            LDR              R0, =DMA2_DMA18_DriverIRQHandle
+r
+  411 0000001C 4700            BX               R0
+  412 0000001E                 ENDP
+  413 0000001E         
+  415 0000001E         DMA3_DMA19_IRQHandler
+                               PROC
+  416 0000001E                 EXPORT           DMA3_DMA19_IRQHandler         [
+WEAK]
+  417 0000001E 4830            LDR              R0, =DMA3_DMA19_DriverIRQHandle
+r
+  418 00000020 4700            BX               R0
+  419 00000022                 ENDP
+  420 00000022         
+  422 00000022         DMA4_DMA20_IRQHandler
+                               PROC
+  423 00000022                 EXPORT           DMA4_DMA20_IRQHandler         [
+WEAK]
+  424 00000022 4830            LDR              R0, =DMA4_DMA20_DriverIRQHandle
+r
+  425 00000024 4700            BX               R0
+  426 00000026                 ENDP
+  427 00000026         
+  429 00000026         DMA5_DMA21_IRQHandler
+                               PROC
+  430 00000026                 EXPORT           DMA5_DMA21_IRQHandler         [
+WEAK]
+  431 00000026 4830            LDR              R0, =DMA5_DMA21_DriverIRQHandle
+r
+  432 00000028 4700            BX               R0
+  433 0000002A                 ENDP
+  434 0000002A         
+  436 0000002A         DMA6_DMA22_IRQHandler
+
+
+
+ARM Macro Assembler    Page 14 
+
+
+                               PROC
+  437 0000002A                 EXPORT           DMA6_DMA22_IRQHandler         [
+WEAK]
+  438 0000002A 4830            LDR              R0, =DMA6_DMA22_DriverIRQHandle
+r
+  439 0000002C 4700            BX               R0
+  440 0000002E                 ENDP
+  441 0000002E         
+  443 0000002E         DMA7_DMA23_IRQHandler
+                               PROC
+  444 0000002E                 EXPORT           DMA7_DMA23_IRQHandler         [
+WEAK]
+  445 0000002E 4830            LDR              R0, =DMA7_DMA23_DriverIRQHandle
+r
+  446 00000030 4700            BX               R0
+  447 00000032                 ENDP
+  448 00000032         
+  450 00000032         DMA8_DMA24_IRQHandler
+                               PROC
+  451 00000032                 EXPORT           DMA8_DMA24_IRQHandler         [
+WEAK]
+  452 00000032 4830            LDR              R0, =DMA8_DMA24_DriverIRQHandle
+r
+  453 00000034 4700            BX               R0
+  454 00000036                 ENDP
+  455 00000036         
+  457 00000036         DMA9_DMA25_IRQHandler
+                               PROC
+  458 00000036                 EXPORT           DMA9_DMA25_IRQHandler         [
+WEAK]
+  459 00000036 4830            LDR              R0, =DMA9_DMA25_DriverIRQHandle
+r
+  460 00000038 4700            BX               R0
+  461 0000003A                 ENDP
+  462 0000003A         
+  464 0000003A         DMA10_DMA26_IRQHandler
+                               PROC
+  465 0000003A                 EXPORT           DMA10_DMA26_IRQHandler         
+[WEAK]
+  466 0000003A 4830            LDR              R0, =DMA10_DMA26_DriverIRQHandl
+er
+  467 0000003C 4700            BX               R0
+  468 0000003E                 ENDP
+  469 0000003E         
+  471 0000003E         DMA11_DMA27_IRQHandler
+                               PROC
+  472 0000003E                 EXPORT           DMA11_DMA27_IRQHandler         
+[WEAK]
+  473 0000003E 4830            LDR              R0, =DMA11_DMA27_DriverIRQHandl
+er
+  474 00000040 4700            BX               R0
+  475 00000042                 ENDP
+  476 00000042         
+  478 00000042         DMA12_DMA28_IRQHandler
+                               PROC
+  479 00000042                 EXPORT           DMA12_DMA28_IRQHandler         
+[WEAK]
+  480 00000042 4830            LDR              R0, =DMA12_DMA28_DriverIRQHandl
+er
+
+
+
+ARM Macro Assembler    Page 15 
+
+
+  481 00000044 4700            BX               R0
+  482 00000046                 ENDP
+  483 00000046         
+  485 00000046         DMA13_DMA29_IRQHandler
+                               PROC
+  486 00000046                 EXPORT           DMA13_DMA29_IRQHandler         
+[WEAK]
+  487 00000046 4830            LDR              R0, =DMA13_DMA29_DriverIRQHandl
+er
+  488 00000048 4700            BX               R0
+  489 0000004A                 ENDP
+  490 0000004A         
+  492 0000004A         DMA14_DMA30_IRQHandler
+                               PROC
+  493 0000004A                 EXPORT           DMA14_DMA30_IRQHandler         
+[WEAK]
+  494 0000004A 4830            LDR              R0, =DMA14_DMA30_DriverIRQHandl
+er
+  495 0000004C 4700            BX               R0
+  496 0000004E                 ENDP
+  497 0000004E         
+  499 0000004E         DMA15_DMA31_IRQHandler
+                               PROC
+  500 0000004E                 EXPORT           DMA15_DMA31_IRQHandler         
+[WEAK]
+  501 0000004E 4830            LDR              R0, =DMA15_DMA31_DriverIRQHandl
+er
+  502 00000050 4700            BX               R0
+  503 00000052                 ENDP
+  504 00000052         
+  506 00000052         DMA_ERROR_IRQHandler
+                               PROC
+  507 00000052                 EXPORT           DMA_ERROR_IRQHandler         [W
+EAK]
+  508 00000052 4830            LDR              R0, =DMA_ERROR_DriverIRQHandler
+  509 00000054 4700            BX               R0
+  510 00000056                 ENDP
+  511 00000056         
+  513 00000056         LPUART1_IRQHandler
+                               PROC
+  514 00000056                 EXPORT           LPUART1_IRQHandler         [WEA
+K]
+  515 00000056 4830            LDR              R0, =LPUART1_DriverIRQHandler
+  516 00000058 4700            BX               R0
+  517 0000005A                 ENDP
+  518 0000005A         
+  520 0000005A         LPUART2_IRQHandler
+                               PROC
+  521 0000005A                 EXPORT           LPUART2_IRQHandler         [WEA
+K]
+  522 0000005A 4830            LDR              R0, =LPUART2_DriverIRQHandler
+  523 0000005C 4700            BX               R0
+  524 0000005E                 ENDP
+  525 0000005E         
+  527 0000005E         LPUART3_IRQHandler
+                               PROC
+  528 0000005E                 EXPORT           LPUART3_IRQHandler         [WEA
+K]
+  529 0000005E 4830            LDR              R0, =LPUART3_DriverIRQHandler
+
+
+
+ARM Macro Assembler    Page 16 
+
+
+  530 00000060 4700            BX               R0
+  531 00000062                 ENDP
+  532 00000062         
+  534 00000062         LPUART4_IRQHandler
+                               PROC
+  535 00000062                 EXPORT           LPUART4_IRQHandler         [WEA
+K]
+  536 00000062 4830            LDR              R0, =LPUART4_DriverIRQHandler
+  537 00000064 4700            BX               R0
+  538 00000066                 ENDP
+  539 00000066         
+  541 00000066         LPUART5_IRQHandler
+                               PROC
+  542 00000066                 EXPORT           LPUART5_IRQHandler         [WEA
+K]
+  543 00000066 4830            LDR              R0, =LPUART5_DriverIRQHandler
+  544 00000068 4700            BX               R0
+  545 0000006A                 ENDP
+  546 0000006A         
+  548 0000006A         LPUART6_IRQHandler
+                               PROC
+  549 0000006A                 EXPORT           LPUART6_IRQHandler         [WEA
+K]
+  550 0000006A 4830            LDR              R0, =LPUART6_DriverIRQHandler
+  551 0000006C 4700            BX               R0
+  552 0000006E                 ENDP
+  553 0000006E         
+  555 0000006E         LPUART7_IRQHandler
+                               PROC
+  556 0000006E                 EXPORT           LPUART7_IRQHandler         [WEA
+K]
+  557 0000006E 4830            LDR              R0, =LPUART7_DriverIRQHandler
+  558 00000070 4700            BX               R0
+  559 00000072                 ENDP
+  560 00000072         
+  562 00000072         LPUART8_IRQHandler
+                               PROC
+  563 00000072                 EXPORT           LPUART8_IRQHandler         [WEA
+K]
+  564 00000072 4830            LDR              R0, =LPUART8_DriverIRQHandler
+  565 00000074 4700            BX               R0
+  566 00000076                 ENDP
+  567 00000076         
+  569 00000076         LPI2C1_IRQHandler
+                               PROC
+  570 00000076                 EXPORT           LPI2C1_IRQHandler         [WEAK
+]
+  571 00000076 4830            LDR              R0, =LPI2C1_DriverIRQHandler
+  572 00000078 4700            BX               R0
+  573 0000007A                 ENDP
+  574 0000007A         
+  576 0000007A         LPI2C2_IRQHandler
+                               PROC
+  577 0000007A                 EXPORT           LPI2C2_IRQHandler         [WEAK
+]
+  578 0000007A 4830            LDR              R0, =LPI2C2_DriverIRQHandler
+  579 0000007C 4700            BX               R0
+  580 0000007E                 ENDP
+  581 0000007E         
+
+
+
+ARM Macro Assembler    Page 17 
+
+
+  583 0000007E         LPI2C3_IRQHandler
+                               PROC
+  584 0000007E                 EXPORT           LPI2C3_IRQHandler         [WEAK
+]
+  585 0000007E 4830            LDR              R0, =LPI2C3_DriverIRQHandler
+  586 00000080 4700            BX               R0
+  587 00000082                 ENDP
+  588 00000082         
+  590 00000082         LPI2C4_IRQHandler
+                               PROC
+  591 00000082                 EXPORT           LPI2C4_IRQHandler         [WEAK
+]
+  592 00000082 4830            LDR              R0, =LPI2C4_DriverIRQHandler
+  593 00000084 4700            BX               R0
+  594 00000086                 ENDP
+  595 00000086         
+  597 00000086         LPSPI1_IRQHandler
+                               PROC
+  598 00000086                 EXPORT           LPSPI1_IRQHandler         [WEAK
+]
+  599 00000086 4830            LDR              R0, =LPSPI1_DriverIRQHandler
+  600 00000088 4700            BX               R0
+  601 0000008A                 ENDP
+  602 0000008A         
+  604 0000008A         LPSPI2_IRQHandler
+                               PROC
+  605 0000008A                 EXPORT           LPSPI2_IRQHandler         [WEAK
+]
+  606 0000008A 4830            LDR              R0, =LPSPI2_DriverIRQHandler
+  607 0000008C 4700            BX               R0
+  608 0000008E                 ENDP
+  609 0000008E         
+  611 0000008E         LPSPI3_IRQHandler
+                               PROC
+  612 0000008E                 EXPORT           LPSPI3_IRQHandler         [WEAK
+]
+  613 0000008E 4830            LDR              R0, =LPSPI3_DriverIRQHandler
+  614 00000090 4700            BX               R0
+  615 00000092                 ENDP
+  616 00000092         
+  618 00000092         LPSPI4_IRQHandler
+                               PROC
+  619 00000092                 EXPORT           LPSPI4_IRQHandler         [WEAK
+]
+  620 00000092 4830            LDR              R0, =LPSPI4_DriverIRQHandler
+  621 00000094 4700            BX               R0
+  622 00000096                 ENDP
+  623 00000096         
+  625 00000096         CAN1_IRQHandler
+                               PROC
+  626 00000096                 EXPORT           CAN1_IRQHandler         [WEAK]
+  627 00000096 4830            LDR              R0, =CAN1_DriverIRQHandler
+  628 00000098 4700            BX               R0
+  629 0000009A                 ENDP
+  630 0000009A         
+  632 0000009A         CAN2_IRQHandler
+                               PROC
+  633 0000009A                 EXPORT           CAN2_IRQHandler         [WEAK]
+  634 0000009A 4830            LDR              R0, =CAN2_DriverIRQHandler
+
+
+
+ARM Macro Assembler    Page 18 
+
+
+  635 0000009C 4700            BX               R0
+  636 0000009E                 ENDP
+  637 0000009E         
+  639 0000009E         SAI1_IRQHandler
+                               PROC
+  640 0000009E                 EXPORT           SAI1_IRQHandler         [WEAK]
+  641 0000009E 4830            LDR              R0, =SAI1_DriverIRQHandler
+  642 000000A0 4700            BX               R0
+  643 000000A2                 ENDP
+  644 000000A2         
+  646 000000A2         SAI2_IRQHandler
+                               PROC
+  647 000000A2                 EXPORT           SAI2_IRQHandler         [WEAK]
+  648 000000A2 4830            LDR              R0, =SAI2_DriverIRQHandler
+  649 000000A4 4700            BX               R0
+  650 000000A6                 ENDP
+  651 000000A6         
+  653 000000A6         SAI3_RX_IRQHandler
+                               PROC
+  654 000000A6                 EXPORT           SAI3_RX_IRQHandler         [WEA
+K]
+  655 000000A6 4830            LDR              R0, =SAI3_RX_DriverIRQHandler
+  656 000000A8 4700            BX               R0
+  657 000000AA                 ENDP
+  658 000000AA         
+  660 000000AA         SAI3_TX_IRQHandler
+                               PROC
+  661 000000AA                 EXPORT           SAI3_TX_IRQHandler         [WEA
+K]
+  662 000000AA 4830            LDR              R0, =SAI3_TX_DriverIRQHandler
+  663 000000AC 4700            BX               R0
+  664 000000AE                 ENDP
+  665 000000AE         
+  667 000000AE         SPDIF_IRQHandler
+                               PROC
+  668 000000AE                 EXPORT           SPDIF_IRQHandler         [WEAK]
+  669 000000AE 4830            LDR              R0, =SPDIF_DriverIRQHandler
+  670 000000B0 4700            BX               R0
+  671 000000B2                 ENDP
+  672 000000B2         
+  674 000000B2         FLEXIO1_IRQHandler
+                               PROC
+  675 000000B2                 EXPORT           FLEXIO1_IRQHandler         [WEA
+K]
+  676 000000B2 4830            LDR              R0, =FLEXIO1_DriverIRQHandler
+  677 000000B4 4700            BX               R0
+  678 000000B6                 ENDP
+  679 000000B6         
+  681 000000B6         FLEXIO2_IRQHandler
+                               PROC
+  682 000000B6                 EXPORT           FLEXIO2_IRQHandler         [WEA
+K]
+  683 000000B6 4830            LDR              R0, =FLEXIO2_DriverIRQHandler
+  684 000000B8 4700            BX               R0
+  685 000000BA                 ENDP
+  686 000000BA         
+  688 000000BA         FLEXSPI_IRQHandler
+                               PROC
+  689 000000BA                 EXPORT           FLEXSPI_IRQHandler         [WEA
+
+
+
+ARM Macro Assembler    Page 19 
+
+
+K]
+  690 000000BA 4830            LDR              R0, =FLEXSPI_DriverIRQHandler
+  691 000000BC 4700            BX               R0
+  692 000000BE                 ENDP
+  693 000000BE         
+  695 000000BE         USDHC1_IRQHandler
+                               PROC
+  696 000000BE                 EXPORT           USDHC1_IRQHandler         [WEAK
+]
+  697 000000BE 4830            LDR              R0, =USDHC1_DriverIRQHandler
+  698 000000C0 4700            BX               R0
+  699 000000C2                 ENDP
+  700 000000C2         
+  702 000000C2         USDHC2_IRQHandler
+                               PROC
+  703 000000C2                 EXPORT           USDHC2_IRQHandler         [WEAK
+]
+  704 000000C2 4830            LDR              R0, =USDHC2_DriverIRQHandler
+  705 000000C4 4700            BX               R0
+  706 000000C6                 ENDP
+  707 000000C6         
+  709 000000C6         ENET_IRQHandler
+                               PROC
+  710 000000C6                 EXPORT           ENET_IRQHandler         [WEAK]
+  711 000000C6 4830            LDR              R0, =ENET_DriverIRQHandler
+  712 000000C8 4700            BX               R0
+  713 000000CA                 ENDP
+  714 000000CA         
+  716 000000CA         ENET_1588_Timer_IRQHandler
+                               PROC
+  717 000000CA                 EXPORT           ENET_1588_Timer_IRQHandler     
+    [WEAK]
+  718 000000CA 4830            LDR              R0, =ENET_1588_Timer_DriverIRQH
+andler
+  719 000000CC 4700            BX               R0
+  720 000000CE                 ENDP
+  721 000000CE         
+  723 000000CE         Default_Handler
+                               PROC
+  724 000000CE                 EXPORT           DMA0_DMA16_DriverIRQHandler    
+     [WEAK]
+  725 000000CE                 EXPORT           DMA1_DMA17_DriverIRQHandler    
+     [WEAK]
+  726 000000CE                 EXPORT           DMA2_DMA18_DriverIRQHandler    
+     [WEAK]
+  727 000000CE                 EXPORT           DMA3_DMA19_DriverIRQHandler    
+     [WEAK]
+  728 000000CE                 EXPORT           DMA4_DMA20_DriverIRQHandler    
+     [WEAK]
+  729 000000CE                 EXPORT           DMA5_DMA21_DriverIRQHandler    
+     [WEAK]
+  730 000000CE                 EXPORT           DMA6_DMA22_DriverIRQHandler    
+     [WEAK]
+  731 000000CE                 EXPORT           DMA7_DMA23_DriverIRQHandler    
+     [WEAK]
+  732 000000CE                 EXPORT           DMA8_DMA24_DriverIRQHandler    
+     [WEAK]
+  733 000000CE                 EXPORT           DMA9_DMA25_DriverIRQHandler    
+     [WEAK]
+
+
+
+ARM Macro Assembler    Page 20 
+
+
+  734 000000CE                 EXPORT           DMA10_DMA26_DriverIRQHandler   
+      [WEAK]
+  735 000000CE                 EXPORT           DMA11_DMA27_DriverIRQHandler   
+      [WEAK]
+  736 000000CE                 EXPORT           DMA12_DMA28_DriverIRQHandler   
+      [WEAK]
+  737 000000CE                 EXPORT           DMA13_DMA29_DriverIRQHandler   
+      [WEAK]
+  738 000000CE                 EXPORT           DMA14_DMA30_DriverIRQHandler   
+      [WEAK]
+  739 000000CE                 EXPORT           DMA15_DMA31_DriverIRQHandler   
+      [WEAK]
+  740 000000CE                 EXPORT           DMA_ERROR_DriverIRQHandler     
+    [WEAK]
+  741 000000CE                 EXPORT           CTI0_ERROR_IRQHandler         [
+WEAK]
+  742 000000CE                 EXPORT           CTI1_ERROR_IRQHandler         [
+WEAK]
+  743 000000CE                 EXPORT           CORE_IRQHandler         [WEAK]
+  744 000000CE                 EXPORT           LPUART1_DriverIRQHandler       
+  [WEAK]
+  745 000000CE                 EXPORT           LPUART2_DriverIRQHandler       
+  [WEAK]
+  746 000000CE                 EXPORT           LPUART3_DriverIRQHandler       
+  [WEAK]
+  747 000000CE                 EXPORT           LPUART4_DriverIRQHandler       
+  [WEAK]
+  748 000000CE                 EXPORT           LPUART5_DriverIRQHandler       
+  [WEAK]
+  749 000000CE                 EXPORT           LPUART6_DriverIRQHandler       
+  [WEAK]
+  750 000000CE                 EXPORT           LPUART7_DriverIRQHandler       
+  [WEAK]
+  751 000000CE                 EXPORT           LPUART8_DriverIRQHandler       
+  [WEAK]
+  752 000000CE                 EXPORT           LPI2C1_DriverIRQHandler        
+ [WEAK]
+  753 000000CE                 EXPORT           LPI2C2_DriverIRQHandler        
+ [WEAK]
+  754 000000CE                 EXPORT           LPI2C3_DriverIRQHandler        
+ [WEAK]
+  755 000000CE                 EXPORT           LPI2C4_DriverIRQHandler        
+ [WEAK]
+  756 000000CE                 EXPORT           LPSPI1_DriverIRQHandler        
+ [WEAK]
+  757 000000CE                 EXPORT           LPSPI2_DriverIRQHandler        
+ [WEAK]
+  758 000000CE                 EXPORT           LPSPI3_DriverIRQHandler        
+ [WEAK]
+  759 000000CE                 EXPORT           LPSPI4_DriverIRQHandler        
+ [WEAK]
+  760 000000CE                 EXPORT           CAN1_DriverIRQHandler         [
+WEAK]
+  761 000000CE                 EXPORT           CAN2_DriverIRQHandler         [
+WEAK]
+  762 000000CE                 EXPORT           FLEXRAM_IRQHandler         [WEA
+K]
+  763 000000CE                 EXPORT           KPP_IRQHandler         [WEAK]
+  764 000000CE                 EXPORT           TSC_DIG_IRQHandler         [WEA
+
+
+
+ARM Macro Assembler    Page 21 
+
+
+K]
+  765 000000CE                 EXPORT           GPR_IRQ_IRQHandler         [WEA
+K]
+  766 000000CE                 EXPORT           LCDIF_IRQHandler         [WEAK]
+  767 000000CE                 EXPORT           CSI_IRQHandler         [WEAK]
+  768 000000CE                 EXPORT           PXP_IRQHandler         [WEAK]
+  769 000000CE                 EXPORT           WDOG2_IRQHandler         [WEAK]
+  770 000000CE                 EXPORT           SNVS_HP_WRAPPER_IRQHandler     
+    [WEAK]
+  771 000000CE                 EXPORT           SNVS_HP_WRAPPER_TZ_IRQHandler  
+       [WEAK]
+  772 000000CE                 EXPORT           SNVS_LP_WRAPPER_IRQHandler     
+    [WEAK]
+  773 000000CE                 EXPORT           CSU_IRQHandler         [WEAK]
+  774 000000CE                 EXPORT           DCP_IRQHandler         [WEAK]
+  775 000000CE                 EXPORT           DCP_VMI_IRQHandler         [WEA
+K]
+  776 000000CE                 EXPORT           Reserved68_IRQHandler         [
+WEAK]
+  777 000000CE                 EXPORT           TRNG_IRQHandler         [WEAK]
+  778 000000CE                 EXPORT           SJC_IRQHandler         [WEAK]
+  779 000000CE                 EXPORT           BEE_IRQHandler         [WEAK]
+  780 000000CE                 EXPORT           SAI1_DriverIRQHandler         [
+WEAK]
+  781 000000CE                 EXPORT           SAI2_DriverIRQHandler         [
+WEAK]
+  782 000000CE                 EXPORT           SAI3_RX_DriverIRQHandler       
+  [WEAK]
+  783 000000CE                 EXPORT           SAI3_TX_DriverIRQHandler       
+  [WEAK]
+  784 000000CE                 EXPORT           SPDIF_DriverIRQHandler         
+[WEAK]
+  785 000000CE                 EXPORT           ANATOP_EVENT0_IRQHandler       
+  [WEAK]
+  786 000000CE                 EXPORT           ANATOP_EVENT1_IRQHandler       
+  [WEAK]
+  787 000000CE                 EXPORT           ANATOP_TAMP_LOW_HIGH_IRQHandler
+         [WEAK]
+  788 000000CE                 EXPORT           ANATOP_TEMP_PANIC_IRQHandler   
+      [WEAK]
+  789 000000CE                 EXPORT           USB_PHY1_IRQHandler         [WE
+AK]
+  790 000000CE                 EXPORT           USB_PHY2_IRQHandler         [WE
+AK]
+  791 000000CE                 EXPORT           ADC1_IRQHandler         [WEAK]
+  792 000000CE                 EXPORT           ADC2_IRQHandler         [WEAK]
+  793 000000CE                 EXPORT           DCDC_IRQHandler         [WEAK]
+  794 000000CE                 EXPORT           Reserved86_IRQHandler         [
+WEAK]
+  795 000000CE                 EXPORT           Reserved87_IRQHandler         [
+WEAK]
+  796 000000CE                 EXPORT           GPIO1_INT0_IRQHandler         [
+WEAK]
+  797 000000CE                 EXPORT           GPIO1_INT1_IRQHandler         [
+WEAK]
+  798 000000CE                 EXPORT           GPIO1_INT2_IRQHandler         [
+WEAK]
+  799 000000CE                 EXPORT           GPIO1_INT3_IRQHandler         [
+WEAK]
+
+
+
+ARM Macro Assembler    Page 22 
+
+
+  800 000000CE                 EXPORT           GPIO1_INT4_IRQHandler         [
+WEAK]
+  801 000000CE                 EXPORT           GPIO1_INT5_IRQHandler         [
+WEAK]
+  802 000000CE                 EXPORT           GPIO1_INT6_IRQHandler         [
+WEAK]
+  803 000000CE                 EXPORT           GPIO1_INT7_IRQHandler         [
+WEAK]
+  804 000000CE                 EXPORT           GPIO1_Combined_0_15_IRQHandler 
+        [WEAK]
+  805 000000CE                 EXPORT           GPIO1_Combined_16_31_IRQHandler
+         [WEAK]
+  806 000000CE                 EXPORT           GPIO2_Combined_0_15_IRQHandler 
+        [WEAK]
+  807 000000CE                 EXPORT           GPIO2_Combined_16_31_IRQHandler
+         [WEAK]
+  808 000000CE                 EXPORT           GPIO3_Combined_0_15_IRQHandler 
+        [WEAK]
+  809 000000CE                 EXPORT           GPIO3_Combined_16_31_IRQHandler
+         [WEAK]
+  810 000000CE                 EXPORT           GPIO4_Combined_0_15_IRQHandler 
+        [WEAK]
+  811 000000CE                 EXPORT           GPIO4_Combined_16_31_IRQHandler
+         [WEAK]
+  812 000000CE                 EXPORT           GPIO5_Combined_0_15_IRQHandler 
+        [WEAK]
+  813 000000CE                 EXPORT           GPIO5_Combined_16_31_IRQHandler
+         [WEAK]
+  814 000000CE                 EXPORT           FLEXIO1_DriverIRQHandler       
+  [WEAK]
+  815 000000CE                 EXPORT           FLEXIO2_DriverIRQHandler       
+  [WEAK]
+  816 000000CE                 EXPORT           WDOG1_IRQHandler         [WEAK]
+  817 000000CE                 EXPORT           RTWDOG_IRQHandler         [WEAK
+]
+  818 000000CE                 EXPORT           EWM_IRQHandler         [WEAK]
+  819 000000CE                 EXPORT           CCM_1_IRQHandler         [WEAK]
+  820 000000CE                 EXPORT           CCM_2_IRQHandler         [WEAK]
+  821 000000CE                 EXPORT           GPC_IRQHandler         [WEAK]
+  822 000000CE                 EXPORT           SRC_IRQHandler         [WEAK]
+  823 000000CE                 EXPORT           Reserved115_IRQHandler         
+[WEAK]
+  824 000000CE                 EXPORT           GPT1_IRQHandler         [WEAK]
+  825 000000CE                 EXPORT           GPT2_IRQHandler         [WEAK]
+  826 000000CE                 EXPORT           PWM1_0_IRQHandler         [WEAK
+]
+  827 000000CE                 EXPORT           PWM1_1_IRQHandler         [WEAK
+]
+  828 000000CE                 EXPORT           PWM1_2_IRQHandler         [WEAK
+]
+  829 000000CE                 EXPORT           PWM1_3_IRQHandler         [WEAK
+]
+  830 000000CE                 EXPORT           PWM1_FAULT_IRQHandler         [
+WEAK]
+  831 000000CE                 EXPORT           Reserved123_IRQHandler         
+[WEAK]
+  832 000000CE                 EXPORT           FLEXSPI_DriverIRQHandler       
+  [WEAK]
+  833 000000CE                 EXPORT           SEMC_IRQHandler         [WEAK]
+
+
+
+ARM Macro Assembler    Page 23 
+
+
+  834 000000CE                 EXPORT           USDHC1_DriverIRQHandler        
+ [WEAK]
+  835 000000CE                 EXPORT           USDHC2_DriverIRQHandler        
+ [WEAK]
+  836 000000CE                 EXPORT           USB_OTG2_IRQHandler         [WE
+AK]
+  837 000000CE                 EXPORT           USB_OTG1_IRQHandler         [WE
+AK]
+  838 000000CE                 EXPORT           ENET_DriverIRQHandler         [
+WEAK]
+  839 000000CE                 EXPORT           ENET_1588_Timer_DriverIRQHandle
+r         [WEAK]
+  840 000000CE                 EXPORT           XBAR1_IRQ_0_1_IRQHandler       
+  [WEAK]
+  841 000000CE                 EXPORT           XBAR1_IRQ_2_3_IRQHandler       
+  [WEAK]
+  842 000000CE                 EXPORT           ADC_ETC_IRQ0_IRQHandler        
+ [WEAK]
+  843 000000CE                 EXPORT           ADC_ETC_IRQ1_IRQHandler        
+ [WEAK]
+  844 000000CE                 EXPORT           ADC_ETC_IRQ2_IRQHandler        
+ [WEAK]
+  845 000000CE                 EXPORT           ADC_ETC_ERROR_IRQ_IRQHandler   
+      [WEAK]
+  846 000000CE                 EXPORT           PIT_IRQHandler         [WEAK]
+  847 000000CE                 EXPORT           ACMP1_IRQHandler         [WEAK]
+  848 000000CE                 EXPORT           ACMP2_IRQHandler         [WEAK]
+  849 000000CE                 EXPORT           ACMP3_IRQHandler         [WEAK]
+  850 000000CE                 EXPORT           ACMP4_IRQHandler         [WEAK]
+  851 000000CE                 EXPORT           Reserved143_IRQHandler         
+[WEAK]
+  852 000000CE                 EXPORT           Reserved144_IRQHandler         
+[WEAK]
+  853 000000CE                 EXPORT           ENC1_IRQHandler         [WEAK]
+  854 000000CE                 EXPORT           ENC2_IRQHandler         [WEAK]
+  855 000000CE                 EXPORT           ENC3_IRQHandler         [WEAK]
+  856 000000CE                 EXPORT           ENC4_IRQHandler         [WEAK]
+  857 000000CE                 EXPORT           TMR1_IRQHandler         [WEAK]
+  858 000000CE                 EXPORT           TMR2_IRQHandler         [WEAK]
+  859 000000CE                 EXPORT           TMR3_IRQHandler         [WEAK]
+  860 000000CE                 EXPORT           TMR4_IRQHandler         [WEAK]
+  861 000000CE                 EXPORT           PWM2_0_IRQHandler         [WEAK
+]
+  862 000000CE                 EXPORT           PWM2_1_IRQHandler         [WEAK
+]
+  863 000000CE                 EXPORT           PWM2_2_IRQHandler         [WEAK
+]
+  864 000000CE                 EXPORT           PWM2_3_IRQHandler         [WEAK
+]
+  865 000000CE                 EXPORT           PWM2_FAULT_IRQHandler         [
+WEAK]
+  866 000000CE                 EXPORT           PWM3_0_IRQHandler         [WEAK
+]
+  867 000000CE                 EXPORT           PWM3_1_IRQHandler         [WEAK
+]
+  868 000000CE                 EXPORT           PWM3_2_IRQHandler         [WEAK
+]
+  869 000000CE                 EXPORT           PWM3_3_IRQHandler         [WEAK
+]
+
+
+
+ARM Macro Assembler    Page 24 
+
+
+  870 000000CE                 EXPORT           PWM3_FAULT_IRQHandler         [
+WEAK]
+  871 000000CE                 EXPORT           PWM4_0_IRQHandler         [WEAK
+]
+  872 000000CE                 EXPORT           PWM4_1_IRQHandler         [WEAK
+]
+  873 000000CE                 EXPORT           PWM4_2_IRQHandler         [WEAK
+]
+  874 000000CE                 EXPORT           PWM4_3_IRQHandler         [WEAK
+]
+  875 000000CE                 EXPORT           PWM4_FAULT_IRQHandler         [
+WEAK]
+  876 000000CE                 EXPORT           Reserved168_IRQHandler         
+[WEAK]
+  877 000000CE                 EXPORT           Reserved169_IRQHandler         
+[WEAK]
+  878 000000CE                 EXPORT           Reserved170_IRQHandler         
+[WEAK]
+  879 000000CE                 EXPORT           Reserved171_IRQHandler         
+[WEAK]
+  880 000000CE                 EXPORT           Reserved172_IRQHandler         
+[WEAK]
+  881 000000CE                 EXPORT           Reserved173_IRQHandler         
+[WEAK]
+  882 000000CE                 EXPORT           SJC_ARM_DEBUG_IRQHandler       
+  [WEAK]
+  883 000000CE                 EXPORT           NMI_WAKEUP_IRQHandler         [
+WEAK]
+  884 000000CE                 EXPORT           DefaultISR         [WEAK]
+  885 000000CE         DMA0_DMA16_DriverIRQHandler
+  886 000000CE         DMA1_DMA17_DriverIRQHandler
+  887 000000CE         DMA2_DMA18_DriverIRQHandler
+  888 000000CE         DMA3_DMA19_DriverIRQHandler
+  889 000000CE         DMA4_DMA20_DriverIRQHandler
+  890 000000CE         DMA5_DMA21_DriverIRQHandler
+  891 000000CE         DMA6_DMA22_DriverIRQHandler
+  892 000000CE         DMA7_DMA23_DriverIRQHandler
+  893 000000CE         DMA8_DMA24_DriverIRQHandler
+  894 000000CE         DMA9_DMA25_DriverIRQHandler
+  895 000000CE         DMA10_DMA26_DriverIRQHandler
+  896 000000CE         DMA11_DMA27_DriverIRQHandler
+  897 000000CE         DMA12_DMA28_DriverIRQHandler
+  898 000000CE         DMA13_DMA29_DriverIRQHandler
+  899 000000CE         DMA14_DMA30_DriverIRQHandler
+  900 000000CE         DMA15_DMA31_DriverIRQHandler
+  901 000000CE         DMA_ERROR_DriverIRQHandler
+  902 000000CE         CTI0_ERROR_IRQHandler
+  903 000000CE         CTI1_ERROR_IRQHandler
+  904 000000CE         CORE_IRQHandler
+  905 000000CE         LPUART1_DriverIRQHandler
+  906 000000CE         LPUART2_DriverIRQHandler
+  907 000000CE         LPUART3_DriverIRQHandler
+  908 000000CE         LPUART4_DriverIRQHandler
+  909 000000CE         LPUART5_DriverIRQHandler
+  910 000000CE         LPUART6_DriverIRQHandler
+  911 000000CE         LPUART7_DriverIRQHandler
+  912 000000CE         LPUART8_DriverIRQHandler
+  913 000000CE         LPI2C1_DriverIRQHandler
+  914 000000CE         LPI2C2_DriverIRQHandler
+
+
+
+ARM Macro Assembler    Page 25 
+
+
+  915 000000CE         LPI2C3_DriverIRQHandler
+  916 000000CE         LPI2C4_DriverIRQHandler
+  917 000000CE         LPSPI1_DriverIRQHandler
+  918 000000CE         LPSPI2_DriverIRQHandler
+  919 000000CE         LPSPI3_DriverIRQHandler
+  920 000000CE         LPSPI4_DriverIRQHandler
+  921 000000CE         CAN1_DriverIRQHandler
+  922 000000CE         CAN2_DriverIRQHandler
+  923 000000CE         FLEXRAM_IRQHandler
+  924 000000CE         KPP_IRQHandler
+  925 000000CE         TSC_DIG_IRQHandler
+  926 000000CE         GPR_IRQ_IRQHandler
+  927 000000CE         LCDIF_IRQHandler
+  928 000000CE         CSI_IRQHandler
+  929 000000CE         PXP_IRQHandler
+  930 000000CE         WDOG2_IRQHandler
+  931 000000CE         SNVS_HP_WRAPPER_IRQHandler
+  932 000000CE         SNVS_HP_WRAPPER_TZ_IRQHandler
+  933 000000CE         SNVS_LP_WRAPPER_IRQHandler
+  934 000000CE         CSU_IRQHandler
+  935 000000CE         DCP_IRQHandler
+  936 000000CE         DCP_VMI_IRQHandler
+  937 000000CE         Reserved68_IRQHandler
+  938 000000CE         TRNG_IRQHandler
+  939 000000CE         SJC_IRQHandler
+  940 000000CE         BEE_IRQHandler
+  941 000000CE         SAI1_DriverIRQHandler
+  942 000000CE         SAI2_DriverIRQHandler
+  943 000000CE         SAI3_RX_DriverIRQHandler
+  944 000000CE         SAI3_TX_DriverIRQHandler
+  945 000000CE         SPDIF_DriverIRQHandler
+  946 000000CE         ANATOP_EVENT0_IRQHandler
+  947 000000CE         ANATOP_EVENT1_IRQHandler
+  948 000000CE         ANATOP_TAMP_LOW_HIGH_IRQHandler
+  949 000000CE         ANATOP_TEMP_PANIC_IRQHandler
+  950 000000CE         USB_PHY1_IRQHandler
+  951 000000CE         USB_PHY2_IRQHandler
+  952 000000CE         ADC1_IRQHandler
+  953 000000CE         ADC2_IRQHandler
+  954 000000CE         DCDC_IRQHandler
+  955 000000CE         Reserved86_IRQHandler
+  956 000000CE         Reserved87_IRQHandler
+  957 000000CE         GPIO1_INT0_IRQHandler
+  958 000000CE         GPIO1_INT1_IRQHandler
+  959 000000CE         GPIO1_INT2_IRQHandler
+  960 000000CE         GPIO1_INT3_IRQHandler
+  961 000000CE         GPIO1_INT4_IRQHandler
+  962 000000CE         GPIO1_INT5_IRQHandler
+  963 000000CE         GPIO1_INT6_IRQHandler
+  964 000000CE         GPIO1_INT7_IRQHandler
+  965 000000CE         GPIO1_Combined_0_15_IRQHandler
+  966 000000CE         GPIO1_Combined_16_31_IRQHandler
+  967 000000CE         GPIO2_Combined_0_15_IRQHandler
+  968 000000CE         GPIO2_Combined_16_31_IRQHandler
+  969 000000CE         GPIO3_Combined_0_15_IRQHandler
+  970 000000CE         GPIO3_Combined_16_31_IRQHandler
+  971 000000CE         GPIO4_Combined_0_15_IRQHandler
+  972 000000CE         GPIO4_Combined_16_31_IRQHandler
+  973 000000CE         GPIO5_Combined_0_15_IRQHandler
+
+
+
+ARM Macro Assembler    Page 26 
+
+
+  974 000000CE         GPIO5_Combined_16_31_IRQHandler
+  975 000000CE         FLEXIO1_DriverIRQHandler
+  976 000000CE         FLEXIO2_DriverIRQHandler
+  977 000000CE         WDOG1_IRQHandler
+  978 000000CE         RTWDOG_IRQHandler
+  979 000000CE         EWM_IRQHandler
+  980 000000CE         CCM_1_IRQHandler
+  981 000000CE         CCM_2_IRQHandler
+  982 000000CE         GPC_IRQHandler
+  983 000000CE         SRC_IRQHandler
+  984 000000CE         Reserved115_IRQHandler
+  985 000000CE         GPT1_IRQHandler
+  986 000000CE         GPT2_IRQHandler
+  987 000000CE         PWM1_0_IRQHandler
+  988 000000CE         PWM1_1_IRQHandler
+  989 000000CE         PWM1_2_IRQHandler
+  990 000000CE         PWM1_3_IRQHandler
+  991 000000CE         PWM1_FAULT_IRQHandler
+  992 000000CE         Reserved123_IRQHandler
+  993 000000CE         FLEXSPI_DriverIRQHandler
+  994 000000CE         SEMC_IRQHandler
+  995 000000CE         USDHC1_DriverIRQHandler
+  996 000000CE         USDHC2_DriverIRQHandler
+  997 000000CE         USB_OTG2_IRQHandler
+  998 000000CE         USB_OTG1_IRQHandler
+  999 000000CE         ENET_DriverIRQHandler
+ 1000 000000CE         ENET_1588_Timer_DriverIRQHandler
+ 1001 000000CE         XBAR1_IRQ_0_1_IRQHandler
+ 1002 000000CE         XBAR1_IRQ_2_3_IRQHandler
+ 1003 000000CE         ADC_ETC_IRQ0_IRQHandler
+ 1004 000000CE         ADC_ETC_IRQ1_IRQHandler
+ 1005 000000CE         ADC_ETC_IRQ2_IRQHandler
+ 1006 000000CE         ADC_ETC_ERROR_IRQ_IRQHandler
+ 1007 000000CE         PIT_IRQHandler
+ 1008 000000CE         ACMP1_IRQHandler
+ 1009 000000CE         ACMP2_IRQHandler
+ 1010 000000CE         ACMP3_IRQHandler
+ 1011 000000CE         ACMP4_IRQHandler
+ 1012 000000CE         Reserved143_IRQHandler
+ 1013 000000CE         Reserved144_IRQHandler
+ 1014 000000CE         ENC1_IRQHandler
+ 1015 000000CE         ENC2_IRQHandler
+ 1016 000000CE         ENC3_IRQHandler
+ 1017 000000CE         ENC4_IRQHandler
+ 1018 000000CE         TMR1_IRQHandler
+ 1019 000000CE         TMR2_IRQHandler
+ 1020 000000CE         TMR3_IRQHandler
+ 1021 000000CE         TMR4_IRQHandler
+ 1022 000000CE         PWM2_0_IRQHandler
+ 1023 000000CE         PWM2_1_IRQHandler
+ 1024 000000CE         PWM2_2_IRQHandler
+ 1025 000000CE         PWM2_3_IRQHandler
+ 1026 000000CE         PWM2_FAULT_IRQHandler
+ 1027 000000CE         PWM3_0_IRQHandler
+ 1028 000000CE         PWM3_1_IRQHandler
+ 1029 000000CE         PWM3_2_IRQHandler
+ 1030 000000CE         PWM3_3_IRQHandler
+ 1031 000000CE         PWM3_FAULT_IRQHandler
+ 1032 000000CE         PWM4_0_IRQHandler
+
+
+
+ARM Macro Assembler    Page 27 
+
+
+ 1033 000000CE         PWM4_1_IRQHandler
+ 1034 000000CE         PWM4_2_IRQHandler
+ 1035 000000CE         PWM4_3_IRQHandler
+ 1036 000000CE         PWM4_FAULT_IRQHandler
+ 1037 000000CE         Reserved168_IRQHandler
+ 1038 000000CE         Reserved169_IRQHandler
+ 1039 000000CE         Reserved170_IRQHandler
+ 1040 000000CE         Reserved171_IRQHandler
+ 1041 000000CE         Reserved172_IRQHandler
+ 1042 000000CE         Reserved173_IRQHandler
+ 1043 000000CE         SJC_ARM_DEBUG_IRQHandler
+ 1044 000000CE         NMI_WAKEUP_IRQHandler
+ 1045 000000CE         DefaultISR
+ 1046 000000CE 4830            LDR              R0, =DefaultISR
+ 1047 000000D0 4700            BX               R0
+ 1048 000000D2                 ENDP
+ 1049 000000D2 00 00           ALIGN
+ 1050 000000D4         
+ 1051 000000D4         
+ 1052 000000D4                 END
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+
+
+
+ARM Macro Assembler    Page 28 
+
+
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+              00000000 
+Command Line: --debug --diag_suppress=9931 --cpu=Cortex-M7 --fpu=SoftVFP --apcs
+=interwork --depend=sdram_debug\startup_mimxrt1052.d -osdram_debug\startup_mimx
+rt1052.o -I.\RTE\_awtk_Sdram_debug -Id:\Keil_v5\ARM\PACK\NXP\iMXRT_DFP\1.0.2\De
+vice\Include -Id:\Keil_v5\ARM\CMSIS\Include --predefine="__UVISION_VERSION SETA
+ 525" --predefine="MIMXRT1052 SETA 1" --predefine="__STARTUP_INITIALIZE_NONCACH
+EDATA SETA 1" --list=.\output\startup_mimxrt1052.lst ..\..\..\..\..\devices\MIM
+XRT1052\arm\startup_MIMXRT1052.s

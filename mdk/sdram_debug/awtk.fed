@@ -1,0 +1,479 @@
+;#<FEEDBACK># ARM Linker, 5060750: Last Updated: Sun May 27 02:22:57 2018
+;VERSION 0.2
+;FILE array.o
+;FILE awtk.o
+__asm___6_awtk_c_main____REV16 <= USED 0
+__asm___6_awtk_c_main____REVSH <= USED 0
+__asm___6_awtk_c_main____RRX <= USED 0
+;FILE bitmap.o
+;FILE blend_image_565_565.o
+;FILE blend_image_565_8888.o
+;FILE blend_image_8888_565.o
+;FILE blend_image_8888_8888.o
+;FILE board.o
+__asm___7_board_c_0ba36a72____REV16 <= USED 0
+__asm___7_board_c_0ba36a72____REVSH <= USED 0
+__asm___7_board_c_0ba36a72____RRX <= USED 0
+;FILE buffer.o
+rbuffer_peek_uint16 <= USED 0
+rbuffer_peek_uint32 <= USED 0
+rbuffer_read_uint16 <= USED 0
+rbuffer_skip <= USED 0
+wbuffer_init <= USED 0
+wbuffer_skip <= USED 0
+wbuffer_write_binary <= USED 0
+wbuffer_write_string <= USED 0
+wbuffer_write_uint16 <= USED 0
+wbuffer_write_uint32 <= USED 0
+wbuffer_write_uint8 <= USED 0
+;FILE button.o
+;FILE canvas.o
+canvas_draw_char <= USED 0
+canvas_draw_hline <= USED 0
+canvas_draw_image_at <= USED 0
+canvas_draw_line <= USED 0
+canvas_draw_points <= USED 0
+canvas_get_height <= USED 0
+canvas_get_width <= USED 0
+canvas_test_paint <= USED 0
+draw_line <= USED 0
+;FILE check_button.o
+;FILE clock_config.o
+__asm___14_clock_config_c_9191db00____REV16 <= USED 0
+__asm___14_clock_config_c_9191db00____REVSH <= USED 0
+__asm___14_clock_config_c_9191db00____RRX <= USED 0
+;FILE color.o
+;FILE demo_main.o
+;FILE demo_ui_app.o
+;FILE dialog.o
+dialog_set_title <= USED 0
+;FILE easing.o
+;FILE easyarm_flexspi_nor_config.o
+__asm___28_easyarm_flexspi_nor_config_c_1dee8ea5____REV16 <= USED 0
+__asm___28_easyarm_flexspi_nor_config_c_1dee8ea5____REVSH <= USED 0
+__asm___28_easyarm_flexspi_nor_config_c_1dee8ea5____RRX <= USED 0
+;FILE edit.o
+edit_set_float_limit <= USED 0
+edit_set_input_tips <= USED 0
+edit_set_input_type <= USED 0
+edit_set_int_limit <= USED 0
+edit_set_readonly <= USED 0
+;FILE emitter.o
+emitter_disable <= USED 0
+emitter_enable <= USED 0
+emitter_find <= USED 0
+emitter_off <= USED 0
+emitter_off_by_func <= USED 0
+emitter_stop <= USED 0
+;FILE enums.o
+align_h_type_find <= USED 0
+align_v_type_find <= USED 0
+find_item_by_value <= USED 0
+image_draw_type_find_by_value <= USED 0
+resource_type_find <= USED 0
+resource_type_find_by_value <= USED 0
+style_id_find <= USED 0
+style_id_find_by_value <= USED 0
+widget_state_find <= USED 0
+widget_type_find <= USED 0
+widget_type_find_by_value <= USED 0
+;FILE event_queue.o
+event_queue_replace_last <= USED 0
+;FILE events.o
+key_event_cast <= USED 0
+paint_event_cast <= USED 0
+pointer_event_cast <= USED 0
+;FILE font.o
+;FILE font_bitmap.o
+;FILE font_manager.o
+;FILE fs.o
+fs_file_size <= USED 0
+fs_read_file <= USED 0
+fs_read_file_part <= USED 0
+fs_unlink <= USED 0
+fs_write_file <= USED 0
+;FILE fsl_assert.o
+__asm___12_fsl_assert_c____REV16 <= USED 0
+__asm___12_fsl_assert_c____REVSH <= USED 0
+__asm___12_fsl_assert_c____RRX <= USED 0
+;FILE fsl_clock.o
+CLOCK_DeinitArmPll <= USED 0
+CLOCK_DeinitExternalClk <= USED 0
+CLOCK_DeinitRcOsc24M <= USED 0
+CLOCK_DeinitSysPfd <= USED 0
+CLOCK_DeinitSysPll <= USED 0
+CLOCK_DeinitUsb1Pfd <= USED 0
+CLOCK_DeinitUsb1Pll <= USED 0
+CLOCK_DisableUsbhs0PhyPllClock <= USED 0
+CLOCK_DisableUsbhs1PhyPllClock <= USED 0
+CLOCK_EnableUsbhs0Clock <= USED 0
+CLOCK_EnableUsbhs0PhyPllClock <= USED 0
+CLOCK_EnableUsbhs1Clock <= USED 0
+CLOCK_EnableUsbhs1PhyPllClock <= USED 0
+CLOCK_InitAudioPll <= USED 0
+CLOCK_InitEnetPll <= USED 0
+CLOCK_InitExternalClk <= USED 0
+CLOCK_InitRcOsc24M <= USED 0
+CLOCK_InitSysPfd <= USED 0
+CLOCK_InitUsb1Pfd <= USED 0
+CLOCK_InitUsb2Pll <= USED 0
+CLOCK_SwitchOsc <= USED 0
+__asm___11_fsl_clock_c_07a918fd____REV16 <= USED 0
+__asm___11_fsl_clock_c_07a918fd____REVSH <= USED 0
+__asm___11_fsl_clock_c_07a918fd____RRX <= USED 0
+;FILE fsl_common.o
+SDK_Free <= USED 0
+SDK_Malloc <= USED 0
+__asm___12_fsl_common_c_82ca3ae9____REV16 <= USED 0
+__asm___12_fsl_common_c_82ca3ae9____REVSH <= USED 0
+__asm___12_fsl_common_c_82ca3ae9____RRX <= USED 0
+;FILE fsl_debug_console.o
+DbgConsole_Deinit <= USED 0
+DbgConsole_Flush <= USED 0
+DbgConsole_Getchar <= USED 0
+DbgConsole_Putchar <= USED 0
+DbgConsole_Scanf <= USED 0
+__asm___19_fsl_debug_console_c_eb138075____REV16 <= USED 0
+__asm___19_fsl_debug_console_c_eb138075____REVSH <= USED 0
+__asm___19_fsl_debug_console_c_eb138075____RRX <= USED 0
+_read <= USED 0
+_write <= USED 0
+;FILE fsl_elcdif.o
+ELCDIF_Deinit <= USED 0
+ELCDIF_RgbModeGetDefaultConfig <= USED 0
+ELCDIF_RgbModeStop <= USED 0
+ELCDIF_UpdateLut <= USED 0
+__asm___12_fsl_elcdif_c_e4a6cc81____REV16 <= USED 0
+__asm___12_fsl_elcdif_c_e4a6cc81____REVSH <= USED 0
+__asm___12_fsl_elcdif_c_e4a6cc81____RRX <= USED 0
+;FILE fsl_ft5406_rt.o
+FT5406_RT_Denit <= USED 0
+FT5406_RT_GetMultiTouch <= USED 0
+__asm___15_fsl_ft5406_rt_c_d20045d4____REV16 <= USED 0
+__asm___15_fsl_ft5406_rt_c_d20045d4____REVSH <= USED 0
+__asm___15_fsl_ft5406_rt_c_d20045d4____RRX <= USED 0
+;FILE fsl_gpio.o
+__asm___10_fsl_gpio_c_c53caebd____REV16 <= USED 0
+__asm___10_fsl_gpio_c_c53caebd____REVSH <= USED 0
+__asm___10_fsl_gpio_c_c53caebd____RRX <= USED 0
+;FILE fsl_io.o
+IO_Deinit <= USED 0
+IO_WaitIdle <= USED 0
+__asm___8_fsl_io_c_IO_Init____REV16 <= USED 0
+__asm___8_fsl_io_c_IO_Init____REVSH <= USED 0
+__asm___8_fsl_io_c_IO_Init____RRX <= USED 0
+;FILE fsl_log.o
+LOG_Deinit <= USED 0
+LOG_ReadCharacter <= USED 0
+LOG_ReadLine <= USED 0
+LOG_WaitIdle <= USED 0
+__asm___9_fsl_log_c_LOG_Init____REV16 <= USED 0
+__asm___9_fsl_log_c_LOG_Init____REVSH <= USED 0
+__asm___9_fsl_log_c_LOG_Init____RRX <= USED 0
+;FILE fsl_lpi2c.o
+LPI2C_MasterConfigureDataMatch <= USED 0
+LPI2C_MasterDeinit <= USED 0
+LPI2C_MasterStart <= USED 0
+LPI2C_MasterTransferAbort <= USED 0
+LPI2C_MasterTransferCreateHandle <= USED 0
+LPI2C_MasterTransferGetCount <= USED 0
+LPI2C_MasterTransferHandleIRQ <= USED 0
+LPI2C_MasterTransferNonBlocking <= USED 0
+LPI2C_SlaveDeinit <= USED 0
+LPI2C_SlaveGetDefaultConfig <= USED 0
+LPI2C_SlaveInit <= USED 0
+LPI2C_SlaveReceive <= USED 0
+LPI2C_SlaveSend <= USED 0
+LPI2C_SlaveTransferAbort <= USED 0
+LPI2C_SlaveTransferCreateHandle <= USED 0
+LPI2C_SlaveTransferGetCount <= USED 0
+LPI2C_SlaveTransferHandleIRQ <= USED 0
+LPI2C_SlaveTransferNonBlocking <= USED 0
+__asm___11_fsl_lpi2c_c_cae7bd0f____REV16 <= USED 0
+__asm___11_fsl_lpi2c_c_cae7bd0f____REVSH <= USED 0
+__asm___11_fsl_lpi2c_c_cae7bd0f____RRX <= USED 0
+;FILE fsl_lpuart.o
+LPUART_Deinit <= USED 0
+LPUART_DisableInterrupts <= USED 0
+LPUART_EnableInterrupts <= USED 0
+LPUART_GetEnabledInterrupts <= USED 0
+LPUART_SetBaudRate <= USED 0
+LPUART_TransferAbortReceive <= USED 0
+LPUART_TransferAbortSend <= USED 0
+LPUART_TransferCreateHandle <= USED 0
+LPUART_TransferGetReceiveCount <= USED 0
+LPUART_TransferGetRxRingBufferLength <= USED 0
+LPUART_TransferGetSendCount <= USED 0
+LPUART_TransferHandleErrorIRQ <= USED 0
+LPUART_TransferHandleIRQ <= USED 0
+LPUART_TransferReceiveNonBlocking <= USED 0
+LPUART_TransferSendNonBlocking <= USED 0
+LPUART_TransferStartRingBuffer <= USED 0
+LPUART_TransferStopRingBuffer <= USED 0
+__asm___12_fsl_lpuart_c_b0574583____REV16 <= USED 0
+__asm___12_fsl_lpuart_c_b0574583____REVSH <= USED 0
+__asm___12_fsl_lpuart_c_b0574583____RRX <= USED 0
+;FILE fsl_pxp.o
+PXP_Deinit <= USED 0
+PXP_Init <= USED 0
+PXP_Reset <= USED 0
+PXP_SetAlphaSurfaceBlendConfig <= USED 0
+PXP_SetAlphaSurfaceBufferConfig <= USED 0
+PXP_SetAlphaSurfaceOverlayColorKey <= USED 0
+PXP_SetAlphaSurfacePosition <= USED 0
+PXP_SetCsc1Mode <= USED 0
+PXP_SetOutputBufferConfig <= USED 0
+PXP_SetProcessSurfaceBufferConfig <= USED 0
+PXP_SetProcessSurfaceColorKey <= USED 0
+PXP_SetProcessSurfacePosition <= USED 0
+PXP_SetProcessSurfaceScaler <= USED 0
+__asm___9_fsl_pxp_c_PXP_Init____REV16 <= USED 0
+__asm___9_fsl_pxp_c_PXP_Init____REVSH <= USED 0
+__asm___9_fsl_pxp_c_PXP_Init____RRX <= USED 0
+;FILE fsl_str.o
+StrFormatScanf <= USED 0
+__asm___9_fsl_str_c_42a1f2fc____REV16 <= USED 0
+__asm___9_fsl_str_c_42a1f2fc____REVSH <= USED 0
+__asm___9_fsl_str_c_42a1f2fc____RRX <= USED 0
+;FILE group_box.o
+;FILE idle.o
+idle_count <= USED 0
+idle_find <= USED 0
+idle_manager_find <= USED 0
+idle_manager_remove <= USED 0
+idle_queue <= USED 0
+idle_remove <= USED 0
+;FILE image.o
+;FILE image_loader.o
+;FILE image_manager.o
+image_manager_unload_unused <= USED 0
+image_manager_update_specific <= USED 0
+;FILE label.o
+;FILE layout.o
+widget_layout_parse <= USED 0
+widget_set_self_layout_params <= USED 0
+;FILE lcd.o
+lcd_destroy <= USED 0
+lcd_draw_points <= USED 0
+lcd_get_point_color <= USED 0
+lcd_get_vgcanvas <= USED 0
+;FILE lcd_mem_rgb565.o
+lcd_mem_create_single_fb <= USED 0
+;FILE lcd_support.o
+APP_FillFrameBuffer <= USED 0
+__asm___13_lcd_support_c_dc760579____REV16 <= USED 0
+__asm___13_lcd_support_c_dc760579____REVSH <= USED 0
+__asm___13_lcd_support_c_dc760579____RRX <= USED 0
+;FILE locale.o
+locale_off <= USED 0
+locale_on <= USED 0
+locale_tr <= USED 0
+str_table_lookup <= USED 0
+;FILE main_loop.o
+main_loop_wakeup <= USED 0
+;FILE main_loop_aworks.o
+__asm___18_main_loop_aworks_c_9314a4ab____REV16 <= USED 0
+__asm___18_main_loop_aworks_c_9314a4ab____REVSH <= USED 0
+__asm___18_main_loop_aworks_c_9314a4ab____RRX <= USED 0
+;FILE main_loop_simple.o
+main_loop_post_key_event <= USED 0
+;FILE matrix.o
+matrix_identity <= USED 0
+matrix_init <= USED 0
+matrix_invert <= USED 0
+matrix_multiply <= USED 0
+matrix_rotate <= USED 0
+matrix_scale <= USED 0
+matrix_set <= USED 0
+matrix_transform_point <= USED 0
+matrix_translate <= USED 0
+;FILE mem.o
+tk_mem_stat <= USED 0
+;FILE mutex.o
+;FILE pin_mux.o
+__asm___9_pin_mux_c_2ab4d743____REV16 <= USED 0
+__asm___9_pin_mux_c_2ab4d743____REVSH <= USED 0
+__asm___9_pin_mux_c_2ab4d743____RRX <= USED 0
+;FILE platform.o
+;FILE progress_bar.o
+;FILE rect.o
+;FILE resource.o
+;FILE resource_manager.o
+;FILE slider.o
+;FILE soft_g2d.o
+;FILE startup_mimxrt1052.o
+;FILE str.o
+str_append <= USED 0
+str_end_with <= USED 0
+str_replace <= USED 0
+str_start_with <= USED 0
+str_to_float <= USED 0
+str_to_int <= USED 0
+str_to_lower <= USED 0
+str_to_upper <= USED 0
+str_trim <= USED 0
+str_trim_left <= USED 0
+str_trim_right <= USED 0
+;FILE system_info.o
+;FILE system_mimxrt1052.o
+__asm___19_system_MIMXRT1052_c_5d646a67____REV16 <= USED 0
+__asm___19_system_MIMXRT1052_c_5d646a67____REVSH <= USED 0
+__asm___19_system_MIMXRT1052_c_5d646a67____RRX <= USED 0
+;FILE theme.o
+;FILE time.o
+;FILE timer.o
+timer_count <= USED 0
+timer_find <= USED 0
+timer_manager_count <= USED 0
+timer_manager_find <= USED 0
+timer_manager_remove <= USED 0
+timer_now <= USED 0
+timer_queue <= USED 0
+timer_remove <= USED 0
+;FILE tk.o
+tk_quit <= USED 0
+;FILE ui_builder.o
+;FILE ui_builder_default.o
+dialog_open <= USED 0
+;FILE ui_builder_writer.o
+ui_builder_writer <= USED 0
+;FILE ui_loader.o
+;FILE ui_loader_default.o
+;FILE ui_loader_xml.o
+ui_loader_load_xml <= USED 0
+xml_ui_loader <= USED 0
+;FILE utf8.o
+unichar_to_utf8 <= USED 0
+utf16_to_utf8 <= USED 0
+utf8_count_char <= USED 0
+utf8_from_utf16 <= USED 0
+utf8_get_prev_char <= USED 0
+;FILE utils.o
+ftk_str2bool <= USED 0
+ftk_strcpy <= USED 0
+;FILE value.o
+value_copy <= USED 0
+value_create <= USED 0
+value_destroy <= USED 0
+value_double <= USED 0
+value_int16 <= USED 0
+value_int32 <= USED 0
+value_int64 <= USED 0
+value_int8 <= USED 0
+value_is_null <= USED 0
+value_set_double <= USED 0
+value_set_int16 <= USED 0
+value_set_int64 <= USED 0
+value_set_int8 <= USED 0
+value_set_uint16 <= USED 0
+value_set_uint64 <= USED 0
+value_uint16 <= USED 0
+value_uint64 <= USED 0
+value_uint8 <= USED 0
+;FILE vgcanvas.o
+vgcanvas_arc <= USED 0
+vgcanvas_arc_to <= USED 0
+vgcanvas_begin_frame <= USED 0
+vgcanvas_begin_path <= USED 0
+vgcanvas_bezier_to <= USED 0
+vgcanvas_bind_fbo <= USED 0
+vgcanvas_clear_rect <= USED 0
+vgcanvas_clip_rect <= USED 0
+vgcanvas_close_path <= USED 0
+vgcanvas_create_fbo <= USED 0
+vgcanvas_destroy <= USED 0
+vgcanvas_destroy_fbo <= USED 0
+vgcanvas_draw_image <= USED 0
+vgcanvas_ellipse <= USED 0
+vgcanvas_end_frame <= USED 0
+vgcanvas_fill <= USED 0
+vgcanvas_fill_text <= USED 0
+vgcanvas_flush <= USED 0
+vgcanvas_is_point_in_path <= USED 0
+vgcanvas_line_to <= USED 0
+vgcanvas_measure_text <= USED 0
+vgcanvas_move_to <= USED 0
+vgcanvas_quad_to <= USED 0
+vgcanvas_rect <= USED 0
+vgcanvas_reset <= USED 0
+vgcanvas_restore <= USED 0
+vgcanvas_rotate <= USED 0
+vgcanvas_rounded_rect <= USED 0
+vgcanvas_save <= USED 0
+vgcanvas_scale <= USED 0
+vgcanvas_set_antialias <= USED 0
+vgcanvas_set_fill_color <= USED 0
+vgcanvas_set_font <= USED 0
+vgcanvas_set_font_size <= USED 0
+vgcanvas_set_global_alpha <= USED 0
+vgcanvas_set_line_cap <= USED 0
+vgcanvas_set_line_join <= USED 0
+vgcanvas_set_line_width <= USED 0
+vgcanvas_set_miter_limit <= USED 0
+vgcanvas_set_stroke_color <= USED 0
+vgcanvas_set_text_align <= USED 0
+vgcanvas_set_text_baseline <= USED 0
+vgcanvas_set_transform <= USED 0
+vgcanvas_stroke <= USED 0
+vgcanvas_transform <= USED 0
+vgcanvas_translate <= USED 0
+vgcanvas_unbind_fbo <= USED 0
+;FILE vgcanvas_null.o
+;FILE view.o
+;FILE widget.o
+widget_count_children <= USED 0
+widget_get_text <= USED 0
+widget_get_value <= USED 0
+widget_move <= USED 0
+widget_off <= USED 0
+widget_off_by_func <= USED 0
+widget_on_click <= USED 0
+widget_re_translate_text <= USED 0
+widget_resize <= USED 0
+widget_set_enable <= USED 0
+widget_set_focused <= USED 0
+widget_set_text <= USED 0
+widget_set_tr_text <= USED 0
+widget_set_value <= USED 0
+widget_set_visible <= USED 0
+widget_to_global <= USED 0
+widget_to_xml <= USED 0
+widget_use_style <= USED 0
+;FILE widget_animator.o
+widget_animator_destroy <= USED 0
+widget_animator_init <= USED 0
+widget_animator_off <= USED 0
+widget_animator_on <= USED 0
+widget_animator_set_repeat <= USED 0
+widget_animator_set_reversed <= USED 0
+widget_animator_set_yoyo <= USED 0
+widget_animator_start <= USED 0
+widget_animator_stop <= USED 0
+widget_animator_update <= USED 0
+;FILE widget_vtable.o
+;FILE window.o
+;FILE window_animator.o
+;FILE window_animator_fb.o
+;FILE window_manager.o
+window_manager_set_animating <= USED 0
+;FILE wstr.o
+wstr_get_utf8 <= USED 0
+wstr_insert <= USED 0
+wstr_remove <= USED 0
+wstr_to_float <= USED 0
+wstr_to_int <= USED 0
+;FILE xml_builder.o
+xml_builder_destroy <= USED 0
+xml_builder_get_attr <= USED 0
+xml_builder_on_comment <= USED 0
+xml_builder_on_end <= USED 0
+xml_builder_on_error <= USED 0
+xml_builder_on_pi <= USED 0
+xml_builder_on_start <= USED 0
+xml_builder_on_text <= USED 0
+;FILE xml_parser.o
+xml_parser_create <= USED 0
+xml_parser_destroy <= USED 0
+xml_parser_parse <= USED 0
+xml_parser_parse_file <= USED 0
+xml_parser_set_builder <= USED 0
