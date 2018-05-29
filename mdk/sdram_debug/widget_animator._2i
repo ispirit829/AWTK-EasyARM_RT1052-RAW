@@ -1,6 +1,0 @@
---c99 -c --cpu Cortex-M7 --fpu=SoftVFP -g -O0 --apcs=interwork --split_sections -I ../../../../../CMSIS/Include -I ../../../../../devices -I .. -I ../../../.. -I ..\..\..\..\..\devices\MIMXRT1052\drivers -I ../../../../../devices/MIMXRT1052 -I ../../../../../devices/MIMXRT1052/utilities/io -I ../../../../../devices/MIMXRT1052/utilities/str -I ../../../../../devices/MIMXRT1052/utilities/log -I ../../../../../devices/MIMXRT1052/utilities -I ..\..\..\..\..\middleware\awtk\src -I ..\..\..\..\..\middleware\awtk -I ..\awtk-port --gnu
--I.\RTE\_awtk_Sdram_debug
--Id:\Keil_v5\ARM\PACK\NXP\iMXRT_DFP\1.0.2\Device\Include
--Id:\Keil_v5\ARM\CMSIS\Include
--D__UVISION_VERSION="525" -DMIMXRT1052 -DNDEBUG -DSDRAM_MPU_INIT -DCPU_MIMXRT1052DVL6A -DAPP_LCDIF_DATA_BUS="kELCDIF_DataBus16Bit" -DUSE_GUI_MAIN -DWITH_BITMAP_FONT -DHAS_STD_MALLOC
--o sdram_debug\widget_animator.o --omf_browse sdram_debug\widget_animator.crf --depend sdram_debug\widget_animator.d --feedback "sdram_debug\awtk.fed" "..\..\..\..\..\middleware\awtk\src\base\widget_animator.c"
