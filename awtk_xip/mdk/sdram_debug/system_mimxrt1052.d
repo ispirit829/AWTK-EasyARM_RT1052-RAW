@@ -1,0 +1,11 @@
+sdram_debug\system_mimxrt1052.o: ..\..\..\..\..\devices\MIMXRT1052\system_MIMXRT1052.c
+sdram_debug\system_mimxrt1052.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+sdram_debug\system_mimxrt1052.o: ..\..\..\..\..\devices\MIMXRT1052\fsl_device_registers.h
+sdram_debug\system_mimxrt1052.o: ..\..\..\..\..\devices\MIMXRT1052\MIMXRT1052.h
+sdram_debug\system_mimxrt1052.o: ../../../../../CMSIS/Include/core_cm7.h
+sdram_debug\system_mimxrt1052.o: ../../../../../CMSIS/Include/cmsis_version.h
+sdram_debug\system_mimxrt1052.o: ../../../../../CMSIS/Include/cmsis_compiler.h
+sdram_debug\system_mimxrt1052.o: ../../../../../CMSIS/Include/cmsis_armcc.h
+sdram_debug\system_mimxrt1052.o: ../../../../../CMSIS/Include/mpu_armv7.h
+sdram_debug\system_mimxrt1052.o: ..\..\..\..\..\devices\MIMXRT1052\system_MIMXRT1052.h
+sdram_debug\system_mimxrt1052.o: ..\..\..\..\..\devices\MIMXRT1052\MIMXRT1052_features.h

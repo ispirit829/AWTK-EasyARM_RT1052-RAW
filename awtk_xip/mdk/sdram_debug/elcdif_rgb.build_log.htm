@@ -1,0 +1,64 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.25.2.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: ISPIRIT Administrator, ZLG, LIC=D0DRA-10DVT-FUE4P-M9RGE-NY0SP-Q1VZ1
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.25.2.0
+Toolchain Path:  d:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.25.2.0
+Dialog DLL:      DCM.DLL V1.17.1.0
+Target DLL:      UL2CM3.DLL V1.160.12.0
+Dialog DLL:      TCM.DLL V1.35.1.0
+ 
+<h2>Project:</h2>
+E:\RT1050\SDK_2.3.0_EasyARM-RT1052 Rev C&D\boards\EasyARM_RT1052 Rev C&D\awtk_examples\awtk_xip\mdk\awtk.uvprojx
+Project File Date:  05/26/2018
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'awtk Sdram_debug'
+linking...
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol LPI2C_MasterTransferBlocking (referred from fsl_ft5406_rt.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol style_get_color (referred from edit.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol style_get_int (referred from edit.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol style_get_str (referred from edit.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol sleep_ms (referred from main_loop.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol get_time_ms (referred from time.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol theme (referred from widget.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol theme_find_style (referred from widget.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol font_bitmap_create (referred from tk.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol main_loop_init (referred from tk.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol platform_prepare (referred from tk.o).
+sdram_debug\elcdif_rgb.out: Error: L6218E: Undefined symbol theme_init (referred from tk.o).
+Not enough information to list image symbols.
+Not enough information to list load addresses in the image map.
+Finished: 2 information, 0 warning and 12 error messages.
+"sdram_debug\elcdif_rgb.out" - 12 Error(s), 0 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: NXP
+                http://mcuxpresso.nxp.com/cmsis_pack/repo/NXP.iMXRT_DFP.1.0.2.pack
+                NXP.iMXRT_DFP.1.0.2
+                NXP iMXRT Series Device Support
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_awtk_Sdram_debug
+  d:\Keil_v5\ARM\PACK\NXP\iMXRT_DFP\1.0.2\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
